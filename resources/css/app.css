@@ -1,0 +1,272 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Laundrix design tokens ───────────────────────────────────── */
+@theme {
+    /* Aliases used throughout the Blade views */
+    --color-primary:   #0ea5e9;
+    --color-secondary: #2563eb;
+    --color-bg:        #f5fbff;
+    --color-card:      #ffffff;
+    --color-text:      #0f172a;
+    --color-text-soft: #64748b;
+    --color-border:    #e2e8f0;
+
+    --color-primary-50:  #f0f9ff;
+    --color-primary-100: #e0f2fe;
+    --color-primary-200: #bae6fd;
+    --color-primary-300: #7dd3fc;
+    --color-primary-400: #38bdf8;
+    --color-primary-800: #075985;
+    --color-primary-900: #0c4a6e;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #0284c7;
+    --color-primary-700: #0369a1;
+    --color-accent-500:  #2563eb;
+    --color-accent-600:  #1d4ed8;
+    --color-surface:     #f8fafc;
+    --color-ink:         #0f172a;
+    --color-ink-soft:    #64748b;
+    --color-line:        #e2e8f0;
+    --color-success:     #22c55e;
+    --color-warning:     #f59e0b;
+    --color-danger:      #ef4444;
+
+    --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+    --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -8px rgb(15 23 42 / 0.10);
+    --shadow-float: 0 2px 4px rgb(15 23 42 / 0.05), 0 24px 48px -12px rgb(14 165 233 / 0.20);
+
+    --radius-card: 1.25rem;
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
+body {
+    font-family: var(--font-sans);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+}
+.dark body { background: #0b1220; color: #e2e8f0; }
+
+h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+::selection { background: rgb(124 58 237 / 0.2); }
+
+/* ─── Brand gradient ───────────────────────────────────────────── */
+.brand-gradient { background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); }
+.brand-text {
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ─── Glassmorphism ────────────────────────────────────────────── */
+.glass {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+}
+.dark .glass {
+    background: #0f172a;
+    border-color: rgb(255 255 255 / 0.08);
+}
+
+/* ─── Floating card ────────────────────────────────────────────── */
+.card-float {
+    background: white;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    transition: transform .35s cubic-bezier(.21,.61,.35,1), box-shadow .35s;
+}
+.card-float:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
+.dark .card-float { background: #101a2e; border-color: rgb(255 255 255 / 0.07); }
+
+/* ─── Aurora hero backdrop ─────────────────────────────────────── */
+.aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.aurora span {
+    position: absolute; border-radius: 9999px; filter: blur(90px); opacity: .35;
+    animation: drift 18s ease-in-out infinite alternate;
+}
+.aurora .a1 { width: 520px; height: 520px; background: #38bdf8; top: -160px; left: -120px; }
+.aurora .a2 { width: 420px; height: 420px; background: #2563eb; top: 10%; right: -140px; animation-delay: -6s; }
+.aurora .a3 { width: 380px; height: 380px; background: #38bdf8; bottom: -180px; left: 35%; animation-delay: -12s; }
+@keyframes drift {
+    from { transform: translate3d(0,0,0) scale(1); }
+    to   { transform: translate3d(60px,40px,0) scale(1.15); }
+}
+
+/* ─── Buttons ──────────────────────────────────────────────────── */
+.btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    box-shadow: 0 10px 26px -10px rgb(124 58 237 / 0.55);
+    transition: transform .25s cubic-bezier(.21,.61,.35,1), box-shadow .25s, filter .25s;
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 16px 34px -10px rgb(14 165 233 / 0.55); }
+.btn-primary:active { transform: translateY(0); }
+.btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold;
+    @apply border border-slate-200 bg-white/70 text-slate-700 backdrop-blur;
+    @apply dark:border-white/10 dark:bg-white/5 dark:text-slate-200;
+    transition: transform .25s, border-color .25s;
+}
+.btn-ghost:hover { transform: translateY(-2px); border-color: #93c5fd; }
+
+/* ─── Reveal-on-scroll (GSAP sets the rest) ────────────────────── */
+/* data-reveal elements stay visible in markup; GSAP animates them in with
+   gsap.from() so a Livewire morph can never strip them back to invisible. */
+[data-reveal] { will-change: transform, opacity; }
+
+/* 3D tilt cards */
+[data-tilt] { transform-style: preserve-3d; transition: box-shadow .3s ease; }
+[data-tilt] > * { transform: translateZ(24px); }
+.tilt-glare {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(420px circle at var(--glare-x, 50%) var(--glare-y, 50%), rgb(255 255 255 / 0.22), transparent 55%);
+    opacity: 0; transition: opacity .25s ease;
+}
+[data-tilt]:hover .tilt-glare { opacity: 1; }
+
+/* ─── Skeleton loader ──────────────────────────────────────────── */
+.skeleton {
+    @apply rounded-xl bg-slate-200/70 dark:bg-slate-700/40;
+    background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / .5), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* ─── Tracking timeline ────────────────────────────────────────── */
+.timeline-dot { transition: background .4s, box-shadow .4s, transform .4s; }
+.timeline-dot.done   { background: linear-gradient(135deg,#38bdf8,#2563eb); box-shadow: 0 0 0 5px rgb(14 165 233 / .18); }
+.timeline-dot.active { transform: scale(1.25); animation: pulse-ring 1.8s infinite; }
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgb(124 58 237 / .45); }
+    70%  { box-shadow: 0 0 0 14px rgb(124 58 237 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(124 58 237 / 0); }
+}
+
+/* ─── Realtime flash effect ────────────────────────────────────── */
+@keyframes rt-flash { 0% { background: rgb(59 130 246 / .14); } 100% { background: transparent; } }
+.rt-updated { animation: rt-flash 1.2s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora span, .skeleton, .timeline-dot.active { animation: none !important; }
+    .card-float, .btn-primary, .btn-ghost { transition: none; }
+}
+
+/* ── Admin CRUD primitives ───────────────────────────────────── */
+.label {
+    @apply block text-xs font-semibold text-text-soft mb-1.5;
+}
+.input {
+    @apply w-full rounded-xl border border-border bg-white/70 px-3.5 py-2.5 text-sm outline-none transition
+           focus:border-primary focus:ring-4 focus:ring-primary/10
+           dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-100;
+}
+.table-admin {
+    @apply w-full text-sm;
+}
+.table-admin thead th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-soft border-b border-border/70 dark:border-slate-800;
+}
+.table-admin tbody td {
+    @apply px-4 py-3 border-b border-border/40 dark:border-slate-800/60 align-middle;
+}
+.table-admin tbody tr {
+    @apply transition hover:bg-primary/[0.03] dark:hover:bg-slate-800/40;
+}
+.badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+}
+.badge-success { @apply bg-success/10 text-success; }
+.badge-warning { @apply bg-warning/10 text-warning; }
+.badge-danger  { @apply bg-danger/10 text-danger; }
+.badge-muted   { @apply bg-border/50 text-text-soft dark:bg-slate-800; }
+.badge-primary { @apply bg-primary/10 text-primary; }
+.btn-soft {
+    @apply inline-flex items-center gap-1.5 rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-text-soft
+           transition hover:border-primary hover:text-primary dark:border-slate-700;
+}
+.btn-danger-soft {
+    @apply inline-flex items-center gap-1.5 rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-text-soft
+           transition hover:border-danger hover:text-danger dark:border-slate-700;
+}
+
+/* ── Soap bubbles (Be Clean style) ─────────────────────────────── */
+.bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.bubbles i {
+    position: absolute; bottom: -80px; display: block; border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgb(255 255 255 / .9), rgb(186 230 253 / .35) 55%, rgb(14 165 233 / .12));
+    border: 1px solid rgb(255 255 255 / .5);
+    animation: bubble-rise linear infinite;
+}
+@keyframes bubble-rise {
+    0%   { transform: translateY(0) translateX(0) scale(.9); opacity: 0; }
+    8%   { opacity: .9; }
+    100% { transform: translateY(-110vh) translateX(30px) scale(1.1); opacity: 0; }
+}
+.reduced-motion .bubbles i { animation: none; display: none; }
+
+/* ── Wave section divider ──────────────────────────────────────── */
+.wave-divider { display: block; width: 100%; height: 70px; }
+
+
+/* ── Laun-style frontend primitives ────────────────────────────── */
+.section-eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--color-primary-600);
+}
+.section-eyebrow::before, .section-eyebrow.center::after {
+    content: ""; height: 2px; width: 38px; background: var(--color-primary-500); border-radius: 9999px;
+}
+.feature-card {
+    position: relative; background: #fff; border-radius: 1.5rem; padding: 2.25rem 1.75rem;
+    border: 1px solid var(--color-border); overflow: hidden; transition: transform .35s ease, box-shadow .35s ease;
+}
+.feature-card::before, .feature-card::after {
+    content: ""; position: absolute; height: 3px; width: 64px; background: linear-gradient(90deg, var(--color-primary-400, #38bdf8), var(--color-secondary)); border-radius: 9999px; transition: width .4s ease;
+}
+.feature-card::before { top: 0; left: 0; }
+.feature-card::after  { bottom: 0; right: 0; }
+.feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); }
+.feature-card:hover::before, .feature-card:hover::after { width: 120px; }
+
+.process-ring {
+    width: 200px; height: 200px; border-radius: 9999px; border: 2px dashed var(--color-border);
+    display: grid; place-items: center; transition: border-color .4s ease, transform .4s ease; position: relative;
+}
+.process-step:hover .process-ring { border-color: var(--color-primary-500); border-style: solid; transform: scale(1.04); }
+.process-pin {
+    position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    width: 56px; height: 56px; clip-path: polygon(50% 0, 100% 80%, 0 80%);
+    background: var(--color-border); display: grid; place-items: start center; padding-top: 6px; transition: background .4s ease;
+}
+.process-step:hover .process-pin { background: linear-gradient(135deg, var(--color-primary-400, #38bdf8), var(--color-secondary)); }
+
+.contact-band {
+    position: relative; overflow: hidden; border-radius: 1.75rem;
+    background: linear-gradient(120deg, #0b1220 0%, #0f1e33 100%);
+}
+.contact-band::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 55%, rgb(14 165 233 / .28));
+}
+
+.tilt-photo { border-radius: 1.75rem; overflow: hidden; box-shadow: var(--shadow-float); }
+.tilt-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* marquee */
+.marquee { display: flex; gap: 3rem; animation: marquee 26s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.reduced-motion .marquee { animation: none; }
+
+/* back-to-top */
+.to-top { transition: opacity .3s ease, transform .3s ease; }
