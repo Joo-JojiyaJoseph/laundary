@@ -76,23 +76,50 @@
             @error('customerId') <p class="mt-2 text-xs font-medium text-danger">{{ $message }}</p> @enderror
         </div>
 
-        {{-- Service filter + products --}}
+        {{-- Category + service filters + products --}}
         <div class="glass relative z-10 rounded-3xl p-5" data-reveal>
-            <div class="flex flex-wrap gap-2">
-                <button wire:click="$set('serviceFilter', null)"
-                        @class([
-                            'rounded-full px-4 py-1.5 text-xs font-semibold transition',
-                            'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => ! $serviceFilter,
-                            'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $serviceFilter,
-                        ])>All</button>
-                @foreach ($services as $service)
-                    <button wire:click="$set('serviceFilter', {{ $service->id }})"
+            {{-- Category filter --}}
+            <div>
+                <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-text-soft">Category</p>
+                <div class="flex flex-wrap gap-2">
+                    <button wire:click="$set('categoryFilter', null)"
                             @class([
                                 'rounded-full px-4 py-1.5 text-xs font-semibold transition',
-                                'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => $serviceFilter === $service->id,
-                                'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $serviceFilter !== $service->id,
-                            ])>{{ $service->name }}</button>
-                @endforeach
+                                'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => ! $categoryFilter,
+                                'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $categoryFilter,
+                            ])>All</button>
+                    @foreach ($categories as $category)
+                        <button wire:click="$set('categoryFilter', {{ $category->id }})"
+                                @class([
+                                    'rounded-full px-4 py-1.5 text-xs font-semibold transition',
+                                    'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => $categoryFilter == $category->id,
+                                    'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $categoryFilter != $category->id,
+                                ])>{{ $category->name }}</button>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Service filter (narrows to the chosen category) --}}
+            <div class="mt-4">
+                <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-text-soft">Service</p>
+                <div class="flex flex-wrap gap-2">
+                    <button wire:click="$set('serviceFilter', null)"
+                            @class([
+                                'rounded-full px-4 py-1.5 text-xs font-semibold transition',
+                                'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => ! $serviceFilter,
+                                'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $serviceFilter,
+                            ])>All</button>
+                    @forelse ($services as $service)
+                        <button wire:click="$set('serviceFilter', {{ $service->id }})"
+                                @class([
+                                    'rounded-full px-4 py-1.5 text-xs font-semibold transition',
+                                    'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25' => $serviceFilter === $service->id,
+                                    'border border-border text-text-soft hover:border-primary hover:text-primary dark:border-slate-700' => $serviceFilter !== $service->id,
+                                ])>{{ $service->name }}</button>
+                    @empty
+                        <span class="px-1 py-1.5 text-xs text-text-soft">No services in this category.</span>
+                    @endforelse
+                </div>
             </div>
 
             <input type="search" wire:model.live.debounce.300ms="productSearch" placeholder="Search products…"

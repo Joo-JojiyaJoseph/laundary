@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -16,6 +17,7 @@ class Terminal extends Component
     public string $customerSearch = "";
     public ?int $customerId = null;
     public string $productSearch = "";
+    public $categoryFilter = null;
     public $serviceFilter = null;
 
     /** @var array<int, array{product_id:int,name:string,uom:string,price:float,qty:float}> */
@@ -42,6 +44,23 @@ class Terminal extends Component
     {
         $this->pickupDate = now()->toDateString();
         $this->deliveryDate = now()->addDays(2)->toDateString();
+    }
+
+    /**
+     * When the category changes, drop a selected service that no longer
+     * belongs to that category so the product grid never shows empty.
+     */
+    public function updatedCategoryFilter(): void
+    {
+        if ($this->serviceFilter && $this->categoryFilter) {
+            $belongs = Service::whereKey($this->serviceFilter)
+                ->where("product_category_id", $this->categoryFilter)
+                ->exists();
+
+            if (! $belongs) {
+                $this->serviceFilter = null;
+            }
+        }
     }
 
     public function quickAddCustomer(): void
@@ -217,8 +236,12 @@ class Terminal extends Component
                     ->orWhere("mobile", "like", "%{$this->customerSearch}%"))->take(6)->get()
                 : collect(),
             "customer" => $this->customerId ? Customer::find($this->customerId) : null,
-            "services" => Service::active()->get(),
+            "categories" => ProductCategory::orderBy("priority")->orderBy("name")->get(),
+            "services" => Service::active()
+                ->when($this->categoryFilter, fn ($q) => $q->where("product_category_id", $this->categoryFilter))
+                ->get(),
             "products" => Product::with("service")->where("is_active", true)
+                ->when($this->categoryFilter, fn ($q) => $q->where("product_category_id", $this->categoryFilter))
                 ->when($this->serviceFilter, fn ($q) => $q->where("service_id", $this->serviceFilter))
                 ->when($this->productSearch, fn ($q) => $q->where("name", "like", "%{$this->productSearch}%"))
                 ->orderBy("priority")->take(24)->get(),
