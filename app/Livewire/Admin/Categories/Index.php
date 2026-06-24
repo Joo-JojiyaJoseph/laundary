@@ -37,10 +37,21 @@ class Index extends Component
     public function save(): void
     {
         $data = $this->validate([
-            "name" => "required|string|max:100",
+            "name" => [
+                "required", "string", "max:100",
+                \Illuminate\Validation\Rule::unique("product_categories", "name")->ignore($this->editingId),
+            ],
+        ], [
+            "name.unique" => "A category with this name already exists.",
         ]);
 
-        ProductCategory::updateOrCreate(["id" => $this->editingId], $data);
+        try {
+            ProductCategory::updateOrCreate(["id" => $this->editingId], $data);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("name", "This category could not be saved — it may already exist.");
+            return;
+        }
+
         $this->showModal = false;
         $this->dispatch("notify", type: "success", message: $this->editingId ? "Category updated." : "Category created.");
     }

@@ -48,8 +48,8 @@ enum OrderStatus: string
     public static function pipeline(): array
     {
         return [
-            self::PickupScheduled, self::PickedUp, self::Washing, self::Ironing,
-            self::QualityCheck, self::Ready, self::OutForDelivery, self::Delivered,
+            self::PickupScheduled, self::PickedUp, self::Washing, self::DryCleaning,
+            self::Ironing, self::QualityCheck, self::Ready, self::OutForDelivery, self::Delivered,
         ];
     }
 }

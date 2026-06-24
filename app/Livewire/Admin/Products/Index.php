@@ -79,14 +79,19 @@ class Index extends Component
             "service_id" => "service",
         ]);
 
-        Product::updateOrCreate(["id" => $this->editingId], [
-            "name" => $data["name"],
-            "service_id" => $data["service_id"],
-            "product_category_id" => $data["form_category_id"],
-            "uom" => $data["uom"],
-            "price" => $data["price"],
-            "is_active" => $data["is_active"],
-        ]);
+        try {
+            Product::updateOrCreate(["id" => $this->editingId], [
+                "name" => $data["name"],
+                "service_id" => $data["service_id"],
+                "product_category_id" => $data["form_category_id"],
+                "uom" => $data["uom"],
+                "price" => $data["price"],
+                "is_active" => $data["is_active"],
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("name", "This item could not be saved. Please check the details and try again.");
+            return;
+        }
 
         $this->showModal = false;
         $this->dispatch("notify", type: "success", title: "Saved", message: "Item saved.");

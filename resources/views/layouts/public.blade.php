@@ -3,9 +3,48 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? config("app.name") }}</title>
+
+    @php
+        $metaTitle = $title ?? config("app.name");
+        $metaDescription = $description
+            ?? "Laundrix is Kerala's modern laundry & dry-cleaning network — doorstep pickup, eco-friendly cleaning, steam ironing and live order tracking from pickup to delivery.";
+        $metaKeywords = $keywords
+            ?? "laundry service Kerala, dry cleaning, wash and fold, steam ironing, doorstep laundry pickup, premium laundry, Ernakulam laundry, Muvattupuzha laundry, online laundry tracking, shoe cleaning, stain removal, Laundrix";
+        $ogImage = asset("icons/og-image.png");
+    @endphp
+
+    {{-- Primary SEO meta --}}
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta name="keywords" content="{{ $metaKeywords }}">
+    <meta name="author" content="Laundrix">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Favicons & app icons --}}
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
     <meta name="theme-color" content="#0EA5E9">
     <link rel="manifest" href="/manifest.json">
+
+    {{-- Open Graph (Facebook, WhatsApp, LinkedIn) --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Laundrix">
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:locale" content="en_IN">
+
+    {{-- Twitter card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,7 +67,7 @@
 
             <div class="hidden items-center gap-8 text-sm font-semibold md:flex"
                  :class="scrolled ? 'text-slate-600' : 'text-white/90'">
-                @foreach (["#home" => "Home", "#about" => "About", "#services" => "Services", "#track" => "Track order", "#contact" => "Contact"] as $r => $label)
+                @foreach (["#home" => "Home", "#about" => "About", "#services" => "Services", "#feedback" => "Feedback", "#track" => "Track order", "#contact" => "Contact"] as $r => $label)
                     <a href="{{ url('/') . $r }}" class="transition hover:text-primary">{{ $label }}</a>
                 @endforeach
             </div>
@@ -46,7 +85,7 @@
             <div x-show="open" x-cloak x-transition.opacity
                  class="absolute inset-x-3 top-16 rounded-3xl glass p-5 md:hidden" @click.outside="open = false">
                 <div class="grid gap-3 text-sm font-medium">
-                    @foreach (["#home" => "Home", "#services" => "Services", "#track" => "Track order", "#about" => "About", "#contact" => "Contact"] as $r => $label)
+                    @foreach (["#home" => "Home", "#services" => "Services", "#feedback" => "Feedback", "#track" => "Track order", "#about" => "About", "#contact" => "Contact"] as $r => $label)
                         <a href="{{ url('/') . $r }}" @click="open = false" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-white/5">{{ $label }}</a>
                     @endforeach
                     <a href="/admin/dashboard" class="btn-primary mt-2">Sign in</a>

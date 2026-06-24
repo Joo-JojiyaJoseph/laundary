@@ -167,6 +167,13 @@
         </div>
     </section>
 
+    {{-- CUSTOMER FEEDBACK (phone-verified) --}}
+    <section id="feedback" class="bg-gradient-to-b from-white to-primary-50/40 py-28">
+        <div class="mx-auto max-w-7xl px-6">
+            <livewire:public.feedback-section />
+        </div>
+    </section>
+
     {{-- TRACK ORDER --}}
     <section id="track" class="relative overflow-hidden bg-gradient-to-br from-[#0b2a52] to-[#0f1e33] py-28 text-white">
         <div class="bubbles" aria-hidden="true">

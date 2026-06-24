@@ -57,12 +57,17 @@ class Index extends Component
             $slug = $base . "-" . ++$i;
         }
 
-        Service::updateOrCreate(["id" => $this->editingId], [
-            "name" => $data["name"],
-            "product_category_id" => $data["product_category_id"],
-            "slug" => $slug,
-            "is_active" => true,
-        ]);
+        try {
+            Service::updateOrCreate(["id" => $this->editingId], [
+                "name" => $data["name"],
+                "product_category_id" => $data["product_category_id"],
+                "slug" => $slug,
+                "is_active" => true,
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("name", "This service could not be saved. Please try again.");
+            return;
+        }
 
         $this->showModal = false;
         $this->dispatch("notify", type: "success", title: "Saved", message: "Service saved.");
