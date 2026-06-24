@@ -1,5 +1,5 @@
 <form wire:submit="submit" class="glass space-y-4 rounded-3xl p-7">
-    <div class="grid gap-4 sm:grid-cols-2">
+    <div class="grid gap-4 sm:grid-cols-2 items-center">
         <div>
             <label class="label">Your name</label>
             <input type="text" wire:model="name" class="input" placeholder="Anjali Menon">
