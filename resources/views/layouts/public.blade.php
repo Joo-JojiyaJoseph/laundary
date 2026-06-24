@@ -229,18 +229,18 @@
                     <li><a href="/admin/dashboard" class="transition hover:text-primary">→ Staff sign in</a></li>
                 </ul>
             </div>
-
             <div>
-                <p class="font-display text-lg font-bold text-white">Sign Up For Newsletter</p>
+                <p class="font-display text-lg font-bold text-white">Follow us</p>
                 <span class="mt-1 block h-1 w-10 rounded-full bg-gradient-to-r from-primary to-secondary"></span>
-                <form
-                    @submit.prevent="$dispatch('notify', { type: 'success', title: 'Subscribed!', message: 'You are on the list for offers and updates.' })"
-                    class="mt-5">
-                    <input type="email" required placeholder="Enter your email"
-                        class="w-full rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-primary">
-                    <button class="btn-primary mt-3 w-full justify-center !rounded-full">Subscribe now</button>
-                </form>
-            </div>
+                <ul class="mt-5 flex items-center gap-3">
+                    @foreach (['facebook', 'twitter', 'linkedin', 'whatsapp'] as $n)
+                        <li><a href="#"
+                                class="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition hover:bg-white hover:text-primary">
+                                <span class="text-xs font-bold uppercase">{{ substr($n, 0, 1) }}</span>
+                            </a></li>
+                    @endforeach
+                </ul>
+        </div>
         </div>
 
         <div class="relative bg-gradient-to-r from-primary to-secondary">
