@@ -7,7 +7,7 @@
         <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search name, mobile or code…" class="input sm:max-w-xs">
             <div class="sm:ml-auto">
-                <x-admin.date-filter />
+                <x-admin.date-filter :current="$period" />
             </div>
         </div>
 
@@ -59,55 +59,50 @@
     <x-admin.modal show="showModal" :title="$editingId ? 'Edit customer' : 'New customer'">
         <form wire:submit="save" class="space-y-4">
             <div>
-                <label class="label">Full name <span class="text-danger">*</span></label>
-                <input type="text" wire:model.blur="name" class="input" placeholder="e.g. Anita Menon">
+                <label class="label">Full name</label>
+                <input type="text" wire:model="name" class="input">
                 @error('name') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <label class="label">Mobile <span class="text-danger">*</span></label>
-                    <input type="text" wire:model.blur="mobile" class="input" placeholder="98765 43210">
+                    <label class="label">Mobile</label>
+                    <input type="text" wire:model="mobile" class="input" placeholder="98765 43210">
                     @error('mobile') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="label">Alternate mobile</label>
-                    <input type="text" wire:model.blur="alternate_mobile" class="input">
-                    @error('alternate_mobile') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
+                    <input type="text" wire:model="alternate_mobile" class="input">
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="label">Email</label>
-                    <input type="email" wire:model.blur="email" class="input">
+                    <input type="email" wire:model="email" class="input">
                     @error('email') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div>
                     <label class="label">Birthday (for rewards)</label>
-                    <input type="date" wire:model.blur="birthday" class="input">
-                    @error('birthday') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
+                    <input type="date" wire:model="birthday" class="input">
                 </div>
             </div>
             <div>
-                <label class="label">Address <span class="text-danger">*</span></label>
-                <textarea wire:model.blur="address" rows="2" class="input" placeholder="House / building, street, area"></textarea>
+                <label class="label">Address</label>
+                <textarea wire:model="address" rows="2" class="input" placeholder="House / building, street, area"></textarea>
                 @error('address') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
             </div>
             <div class="grid grid-cols-3 gap-3">
                 <div>
                     <label class="label">City</label>
-                    <input type="text" wire:model.blur="city" class="input">
-                    @error('city') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
+                    <input type="text" wire:model="city" class="input">
                 </div>
                 <div>
                     <label class="label">Pincode</label>
-                    <input type="text" wire:model.blur="pincode" class="input">
-                    @error('pincode') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
+                    <input type="text" wire:model="pincode" class="input">
                 </div>
             </div>
             <div>
                 <label class="label">Notes</label>
-                <textarea wire:model.blur="notes" rows="2" class="input" placeholder="Preferences, allergies to detergents…"></textarea>
-                @error('notes') <p class="mt-1 text-xs text-danger">{{ $message }}</p> @enderror
+                <textarea wire:model="notes" rows="2" class="input" placeholder="Preferences, allergies to detergents…"></textarea>
             </div>
             <button class="btn-primary w-full justify-center" wire:loading.attr="disabled">
                 <span wire:loading.remove wire:target="save">Save customer</span>

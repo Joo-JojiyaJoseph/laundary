@@ -7,10 +7,33 @@
         </button>
     </x-admin.page-header>
 
-    {{-- Filters --}}
+   
+
+    {{-- Summary --}}
+    <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 py-4" data-reveal>
+        <div class="glass rounded-3xl p-5">
+            <p class="text-sm text-text-soft">Transactions</p>
+            <p class="font-display text-3xl font-bold">{{ number_format($summary['count']) }}</p>
+            <p class="mt-1 text-xs text-text-soft">{{ $this->periodLabel() }}</p>
+        </div>
+        <div class="glass rounded-3xl p-5">
+            <p class="text-sm text-text-soft">Collected</p>
+            <p class="font-display text-3xl font-bold text-success">₹{{ number_format($summary['collected'], 2) }}</p>
+        </div>
+        <div class="glass rounded-3xl p-5">
+            <p class="text-sm text-text-soft">Refunded</p>
+            <p class="font-display text-3xl font-bold text-danger">₹{{ number_format($summary['refunded'], 2) }}</p>
+        </div>
+        <div class="glass rounded-3xl p-5">
+            <p class="text-sm text-text-soft">Net</p>
+            <p class="font-display text-3xl font-bold">₹{{ number_format($summary['net'], 2) }}</p>
+        </div>
+    </div>
+
+     {{-- Filters --}}
     <div class="glass rounded-3xl p-4 sm:p-5" data-reveal>
         <div class="space-y-3">
-            <x-admin.date-filter />
+            <x-admin.date-filter :current="$period" />
             <div class="grid gap-3 sm:grid-cols-3">
                 <select wire:model.live="customerFilter" class="input">
                     <option value="">All customers</option>
@@ -32,27 +55,6 @@
                     <option value="refund">Refund</option>
                 </select>
             </div>
-        </div>
-    </div>
-
-    {{-- Summary --}}
-    <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
-        <div class="glass rounded-3xl p-5">
-            <p class="text-sm text-text-soft">Transactions</p>
-            <p class="font-display text-3xl font-bold">{{ number_format($summary['count']) }}</p>
-            <p class="mt-1 text-xs text-text-soft">{{ $this->periodLabel() }}</p>
-        </div>
-        <div class="glass rounded-3xl p-5">
-            <p class="text-sm text-text-soft">Collected</p>
-            <p class="font-display text-3xl font-bold text-success">₹{{ number_format($summary['collected'], 2) }}</p>
-        </div>
-        <div class="glass rounded-3xl p-5">
-            <p class="text-sm text-text-soft">Refunded</p>
-            <p class="font-display text-3xl font-bold text-danger">₹{{ number_format($summary['refunded'], 2) }}</p>
-        </div>
-        <div class="glass rounded-3xl p-5">
-            <p class="text-sm text-text-soft">Net</p>
-            <p class="font-display text-3xl font-bold">₹{{ number_format($summary['net'], 2) }}</p>
         </div>
     </div>
 

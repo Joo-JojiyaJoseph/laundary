@@ -20,7 +20,7 @@
                     <option value="paid">Paid</option>
                 </select>
             </div>
-            <x-admin.date-filter />
+            <x-admin.date-filter :current="$period" />
         </div>
 
         <div class="mt-4 overflow-x-auto">

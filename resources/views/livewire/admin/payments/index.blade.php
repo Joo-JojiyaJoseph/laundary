@@ -36,7 +36,7 @@
                     <option value="bank_transfer">Bank transfer</option>
                 </select>
                 <div class="lg:ml-auto">
-                    <x-admin.date-filter />
+                    <x-admin.date-filter :current="$period" />
                 </div>
             @endif
         </div>

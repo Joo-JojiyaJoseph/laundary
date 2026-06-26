@@ -11,7 +11,6 @@ class Feedback extends Model
     protected $guarded = [];
 
     protected $casts = [
-<<<<<<< HEAD
         'is_approved' => 'boolean',
         'approved_at' => 'datetime',
         'rating' => 'integer',
@@ -36,17 +35,5 @@ class Feedback extends Model
     public function scopePending($query)
     {
         return $query->where('is_approved', false);
-=======
-        'is_verified' => 'boolean',
-        'is_approved' => 'boolean',
-        'verified_at' => 'datetime',
-        'rating' => 'integer',
-    ];
-
-    /** Reviews that are phone-verified and approved — safe to show publicly. */
-    public function scopePublic($query)
-    {
-        return $query->where('is_verified', true)->where('is_approved', true);
->>>>>>> c0aaad51798596a0c0b373416eb6c774bfc4be3d
     }
 }

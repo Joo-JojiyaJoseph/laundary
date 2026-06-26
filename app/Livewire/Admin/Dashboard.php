@@ -6,7 +6,6 @@ use App\Livewire\Concerns\WithDateFilter;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Payment;
-use App\Models\Rider;
 use App\Services\AI\AiInsightsService;
 use Livewire\Component;
 
@@ -38,19 +37,23 @@ class Dashboard extends Component
             ->when($to, fn ($w) => $w->where("created_at", "<=", $to));
 
         $stats = [
-            "orders_today"   => $inPeriod($scope(Order::query()))->count(),
-            "pending"        => $scope(Order::whereNotIn("status", ["delivered"]))->count(),
-            "delivered"      => $scope(Order::where("status", "delivered"))
-                ->when($from, fn ($w) => $w->where("delivered_at", ">=", $from))
-                ->when($to, fn ($w) => $w->where("delivered_at", "<=", $to))
-                ->count(),
-            "revenue_today"  => (float) Payment::query()
+            // Orders created in the selected period.
+            "orders_today"  => $inPeriod($scope(Order::query()))->count(),
+            // Of those, the ones not yet delivered…
+            "pending"       => $inPeriod($scope(Order::query()))->whereNotIn("status", ["delivered"])->count(),
+            // …and the ones delivered.
+            "delivered"     => $inPeriod($scope(Order::query()))->where("status", "delivered")->count(),
+            // Money collected in the period.
+            "revenue_today" => (float) Payment::query()
                 ->when($from, fn ($w) => $w->where("created_at", ">=", $from))
                 ->when($to, fn ($w) => $w->where("created_at", "<=", $to))
                 ->when($branchId, fn ($q) => $q->whereHas("order", fn ($o) => $o->where("branch_id", $branchId)))
                 ->sum("amount"),
-            "customers"      => $scope(Customer::query())->count(),
-            "riders_online"  => $scope(Rider::where("is_online", true))->count(),
+            // New customers registered in the period.
+            "customers"     => $inPeriod($scope(Customer::query()))->count(),
+            // Distinct riders who handled orders in the period.
+            "riders_online" => $inPeriod($scope(Order::query()))
+                ->whereNotNull("rider_id")->distinct()->count("rider_id"),
         ];
 
         $raw = $scope(Order::query())

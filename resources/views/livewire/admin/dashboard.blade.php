@@ -6,7 +6,7 @@
             <h1 class="font-display text-xl font-bold">Overview</h1>
             <p class="text-sm text-text-soft">Showing data for: <span class="font-semibold text-text">{{ $this->periodLabel() }}</span></p>
         </div>
-        <x-admin.date-filter />
+        <x-admin.date-filter :current="$period" />
     </div>
 
     {{-- Stat cards --}}
@@ -14,11 +14,11 @@
         @php
             $cards = [
                 ['label' => "Orders", 'value' => $stats['orders_today'], 'icon' => 'shopping-bag', 'tint' => 'from-primary/15 to-primary/5'],
-                ['label' => 'Pending now', 'value' => $stats['pending'], 'icon' => 'clock', 'tint' => 'from-warning/15 to-warning/5'],
+                ['label' => 'Pending', 'value' => $stats['pending'], 'icon' => 'clock', 'tint' => 'from-warning/15 to-warning/5'],
                 ['label' => 'Delivered', 'value' => $stats['delivered'], 'icon' => 'check-circle', 'tint' => 'from-success/15 to-success/5'],
                 ['label' => "Revenue", 'value' => (int) $stats['revenue_today'], 'icon' => 'banknotes', 'tint' => 'from-secondary/15 to-secondary/5', 'prefix' => '&#8377;'],
                 ['label' => 'Customers', 'value' => $stats['customers'], 'icon' => 'users', 'tint' => 'from-primary/15 to-secondary/5'],
-                ['label' => 'Riders online', 'value' => $stats['riders_online'], 'icon' => 'truck', 'tint' => 'from-success/15 to-primary/5'],
+                ['label' => 'Active riders', 'value' => $stats['riders_online'], 'icon' => 'truck', 'tint' => 'from-success/15 to-primary/5'],
             ];
         @endphp
         @foreach ($cards as $card)

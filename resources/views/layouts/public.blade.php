@@ -125,13 +125,8 @@
             </a>
 
             <div class="hidden items-center gap-8 text-sm font-semibold md:flex"
-<<<<<<< HEAD
                  :class="scrolled ? 'text-slate-600' : 'text-white/90'">
                 @foreach (["#home" => "Home", "#about" => "About", "#services" => "Services", "#track" => "Track order", "#feedback" => "Reviews", "#contact" => "Contact"] as $r => $label)
-=======
-                :class="scrolled ? 'text-slate-600' : 'text-white/90'">
-                @foreach (['#home' => 'Home', '#about' => 'About', '#services' => 'Services', '#feedback' => 'Feedback', '#track' => 'Track order', '#contact' => 'Contact'] as $r => $label)
->>>>>>> c0aaad51798596a0c0b373416eb6c774bfc4be3d
                     <a href="{{ url('/') . $r }}" class="transition hover:text-primary">{{ $label }}</a>
                 @endforeach
             </div>
@@ -152,14 +147,8 @@
             <div x-show="open" x-cloak x-transition.opacity
                 class="absolute inset-x-3 top-16 rounded-3xl glass p-5 md:hidden" @click.outside="open = false">
                 <div class="grid gap-3 text-sm font-medium">
-<<<<<<< HEAD
                     @foreach (["#home" => "Home", "#services" => "Services", "#track" => "Track order", "#about" => "About", "#feedback" => "Reviews", "#contact" => "Contact"] as $r => $label)
                         <a href="{{ url('/') . $r }}" @click="open = false" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-white/5">{{ $label }}</a>
-=======
-                    @foreach (['#home' => 'Home', '#services' => 'Services', '#feedback' => 'Feedback', '#track' => 'Track order', '#about' => 'About', '#contact' => 'Contact'] as $r => $label)
-                        <a href="{{ url('/') . $r }}" @click="open = false"
-                            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-white/5">{{ $label }}</a>
->>>>>>> c0aaad51798596a0c0b373416eb6c774bfc4be3d
                     @endforeach
                     <a href="/admin/dashboard" class="btn-primary mt-2">Sign in</a>
                 </div>

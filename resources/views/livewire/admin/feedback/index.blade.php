@@ -16,7 +16,7 @@
             </div>
             <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search name or text…" class="input sm:max-w-xs">
             <div class="sm:ml-auto">
-                <x-admin.date-filter />
+                <x-admin.date-filter :current="$period" />
             </div>
         </div>
 
