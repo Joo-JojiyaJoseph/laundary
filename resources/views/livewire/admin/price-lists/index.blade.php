@@ -15,7 +15,7 @@
         </div>
 
         <div class="mt-4 overflow-x-auto">
-            <table class="table-admin">
+            <table class="table-admin table-cards">
                 <thead><tr><th>Item</th><th>Type</th><th>Scope</th><th>Price</th><th>Window</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
                 <tbody>
                     @forelse ($rules as $rule)

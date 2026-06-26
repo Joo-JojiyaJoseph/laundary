@@ -1,13 +1,22 @@
 <div wire:poll.60s class="space-y-6">
 
+    {{-- Period filter --}}
+    <div class="flex flex-wrap items-center justify-between gap-3" data-reveal>
+        <div>
+            <h1 class="font-display text-xl font-bold">Overview</h1>
+            <p class="text-sm text-text-soft">Showing data for: <span class="font-semibold text-text">{{ $this->periodLabel() }}</span></p>
+        </div>
+        <x-admin.date-filter />
+    </div>
+
     {{-- Stat cards --}}
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         @php
             $cards = [
-                ['label' => "Today's orders", 'value' => $stats['orders_today'], 'icon' => 'shopping-bag', 'tint' => 'from-primary/15 to-primary/5'],
-                ['label' => 'Pending', 'value' => $stats['pending'], 'icon' => 'clock', 'tint' => 'from-warning/15 to-warning/5'],
+                ['label' => "Orders", 'value' => $stats['orders_today'], 'icon' => 'shopping-bag', 'tint' => 'from-primary/15 to-primary/5'],
+                ['label' => 'Pending now', 'value' => $stats['pending'], 'icon' => 'clock', 'tint' => 'from-warning/15 to-warning/5'],
                 ['label' => 'Delivered', 'value' => $stats['delivered'], 'icon' => 'check-circle', 'tint' => 'from-success/15 to-success/5'],
-                ['label' => "Today's revenue", 'value' => (int) $stats['revenue_today'], 'icon' => 'banknotes', 'tint' => 'from-secondary/15 to-secondary/5', 'prefix' => '&#8377;'],
+                ['label' => "Revenue", 'value' => (int) $stats['revenue_today'], 'icon' => 'banknotes', 'tint' => 'from-secondary/15 to-secondary/5', 'prefix' => '&#8377;'],
                 ['label' => 'Customers', 'value' => $stats['customers'], 'icon' => 'users', 'tint' => 'from-primary/15 to-secondary/5'],
                 ['label' => 'Riders online', 'value' => $stats['riders_online'], 'icon' => 'truck', 'tint' => 'from-success/15 to-primary/5'],
             ];
@@ -19,7 +28,7 @@
                 </div>
                 <p class="mt-4 font-display text-3xl font-bold"
                    data-counter="{{ $card['value'] }}"
-                   @isset($card['prefix']) data-prefix="&#8377;" @endisset>0</p>
+                   @isset($card['prefix']) data-prefix="&#8377;" @endisset>{!! isset($card['prefix']) ? '&#8377;' : '' !!}{{ number_format($card['value']) }}</p>
                 <p class="mt-1 text-sm text-text-soft">{{ $card['label'] }}</p>
             </div>
         @endforeach

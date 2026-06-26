@@ -7,7 +7,7 @@
         <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search services…" class="input max-w-xs">
 
         <div class="mt-4 overflow-x-auto">
-            <table class="table-admin">
+            <table class="table-admin table-cards">
                 <thead><tr><th>Service</th><th>Category</th><th>Items</th><th class="text-right">Actions</th></tr></thead>
                 <tbody>
                     @forelse ($services as $service)

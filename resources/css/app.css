@@ -199,6 +199,44 @@ h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0
            transition hover:border-danger hover:text-danger dark:border-slate-700;
 }
 
+/* ── Responsive tables → cards on mobile ───────────────────────── */
+/* Add the `table-cards` class next to `table-admin`. A small script in the
+   admin layout copies each column header into the cell's data-label so every
+   row becomes a self-labelled card on narrow screens. */
+@media (max-width: 767px) {
+    .table-cards { min-width: 0 !important; }
+    .table-cards thead { display: none; }
+    .table-cards,
+    .table-cards tbody { display: block; width: 100%; }
+
+    .table-cards tbody tr {
+        @apply block rounded-2xl border border-border/70 bg-white/70 p-4 shadow-sm
+               dark:border-slate-800 dark:bg-slate-800/40;
+        margin-bottom: 0.75rem;
+    }
+    .table-cards tbody tr:last-child { margin-bottom: 0; }
+
+    .table-cards tbody td {
+        @apply flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-0 py-2 text-right;
+        border: 0;
+    }
+    .table-cards tbody td + td {
+        @apply border-t border-dashed border-border/50 dark:border-slate-700/60;
+    }
+    .table-cards tbody td::before {
+        content: attr(data-label);
+        @apply shrink-0 text-left text-[11px] font-semibold uppercase tracking-wide text-text-soft;
+    }
+
+    /* Action / unlabelled cells: no label, centred buttons, clear separation */
+    .table-cards tbody td:not([data-label])::before { content: none; }
+    .table-cards tbody td:not([data-label]) {
+        @apply justify-center pt-3;
+    }
+    /* Empty cells (e.g. placeholder header columns) collapse away */
+    .table-cards tbody td:empty { display: none; }
+}
+
 /* ── Soap bubbles (Be Clean style) ─────────────────────────────── */
 .bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .bubbles i {

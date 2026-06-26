@@ -14,33 +14,36 @@
         </div>
     </div>
 
-    <div class="glass rounded-3xl p-5" data-reveal>
-        <div class="flex flex-wrap items-center gap-3">
-            <div class="flex rounded-2xl border border-border p-1 dark:border-slate-700">
-                <button wire:click="$set('tab', 'payments')"
-                        class="rounded-xl px-4 py-1.5 text-sm font-semibold transition {{ $tab === 'payments' ? 'bg-gradient-to-r from-primary to-secondary text-white shadow' : 'text-text-soft' }}">
-                    Transactions
-                </button>
+    <div class="glass rounded-3xl p-4 sm:p-5" data-reveal>
+        <div class="flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center">
+            <div class="flex rounded-2xl border border-border p-1 dark:border-slate-700 w-max">
                 <button wire:click="$set('tab', 'outstanding')"
                         class="rounded-xl px-4 py-1.5 text-sm font-semibold transition {{ $tab === 'outstanding' ? 'bg-gradient-to-r from-primary to-secondary text-white shadow' : 'text-text-soft' }}">
                     Outstanding
                 </button>
+                <button wire:click="$set('tab', 'payments')"
+                        class="rounded-xl px-4 py-1.5 text-sm font-semibold transition {{ $tab === 'payments' ? 'bg-gradient-to-r from-primary to-secondary text-white shadow' : 'text-text-soft' }}">
+                    Transactions
+                </button>
             </div>
             @if ($tab === 'payments')
-                <input type="search" wire:model.live.debounce.300ms="search" placeholder="Order no or customer…" class="input max-w-xs">
-                <select wire:model.live="methodFilter" class="input max-w-44">
+                <input type="search" wire:model.live.debounce.300ms="search" placeholder="Order no or customer…" class="input sm:max-w-xs">
+                <select wire:model.live="methodFilter" class="input sm:max-w-44">
                     <option value="">All methods</option>
                     <option value="cash">Cash</option>
                     <option value="upi">UPI</option>
                     <option value="card">Card</option>
                     <option value="bank_transfer">Bank transfer</option>
                 </select>
+                <div class="lg:ml-auto">
+                    <x-admin.date-filter />
+                </div>
             @endif
         </div>
 
         <div class="mt-4 overflow-x-auto">
             @if ($tab === 'payments')
-                <table class="table-admin">
+                <table class="table-admin table-cards min-w-[760px]">
                     <thead><tr><th>Order</th><th>Customer</th><th>Method</th><th>Type</th><th>Received by</th><th>When</th><th class="text-right">Amount</th></tr></thead>
                     <tbody>
                         @forelse ($payments as $payment)
@@ -64,7 +67,7 @@
                 </table>
                 <div class="mt-4">{{ $payments->links() }}</div>
             @else
-                <table class="table-admin">
+                <table class="table-admin table-cards min-w-[680px]">
                     <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Paid</th><th>Due</th><th>Status</th><th></th></tr></thead>
                     <tbody>
                         @forelse ($outstanding as $order)

@@ -22,7 +22,7 @@
     <aside class="fixed inset-y-0 left-0 z-40 w-72 transform transition-transform duration-300 ease-out lg:translate-x-0"
            :class="sidebar ? 'translate-x-0' : '-translate-x-full'">
         <div class="glass m-3 flex h-[calc(100vh-1.5rem)] flex-col rounded-3xl p-5">
-            <a href="{{ route('admin.dashboard') }}" wire:navigate class="flex items-center gap-3 px-2">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-2">
                 <span class="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/30"><x-icon name="sparkles" class="h-5 w-5" /></span>
                 <span class="font-display text-xl font-bold">Laundrix</span>
             </a>
@@ -39,6 +39,11 @@
                             ['route' => 'admin.payments.index', 'match' => 'admin.payments.*', 'label' => 'Payments', 'icon' => 'banknotes'],
                             ['route' => 'admin.customers.index', 'match' => 'admin.customers.*', 'label' => 'Customers', 'icon' => 'users'],
                             ['route' => 'admin.riders.index', 'match' => 'admin.riders.*', 'label' => 'Riders', 'icon' => 'truck'],
+                            ['route' => 'admin.feedback.index', 'match' => 'admin.feedback.*', 'label' => 'Feedback', 'icon' => 'chat-bubble-left-right'],
+                        ],
+                        'Reports' => [
+                            ['route' => 'admin.reports.orders', 'match' => 'admin.reports.orders', 'label' => 'Order report', 'icon' => 'document-text'],
+                            ['route' => 'admin.reports.payments', 'match' => 'admin.reports.payments', 'label' => 'Payment report', 'icon' => 'chart-bar'],
                         ],
                         'Catalogue' => [
                              ['route' => 'admin.categories.index', 'match' => 'admin.categories.*', 'label' => 'Categories', 'icon' => 'tag'],
@@ -51,7 +56,8 @@
                     <p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-text-soft/70">{{ $groupLabel }}</p>
                     @foreach ($links as $link)
                         @php $active = request()->routeIs($link['match']); @endphp
-                        <a href="{{ route($link['route']) }}" wire:navigate
+                        <a href="{{ route($link['route']) }}"
+                           @click="if (window.innerWidth < 1024) sidebar = false"
                            @class([
                                'group flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-200',
                                'bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/25' => $active,
@@ -112,6 +118,41 @@
 
     <x-feedback-modal />
     <x-confirm-modal />
+
+    {{-- Turn `.table-cards` tables into labelled cards on mobile by copying each
+         column header into the matching cell's data-label. Re-runs after every
+         Livewire DOM update (pagination, filters, tab switches). --}}
+    <script>
+        (function () {
+            function labelize() {
+                document.querySelectorAll('table.table-cards').forEach(function (table) {
+                    var headers = Array.prototype.map.call(
+                        table.querySelectorAll('thead th'),
+                        function (th) { return th.textContent.trim(); }
+                    );
+                    table.querySelectorAll('tbody tr').forEach(function (tr) {
+                        Array.prototype.forEach.call(tr.children, function (td, i) {
+                            if (headers[i]) { td.setAttribute('data-label', headers[i]); }
+                            else { td.removeAttribute('data-label'); }
+                        });
+                    });
+                });
+            }
+            var timer;
+            function schedule() { clearTimeout(timer); timer = setTimeout(labelize, 60); }
+
+            document.addEventListener('DOMContentLoaded', labelize);
+            document.addEventListener('livewire:navigated', labelize);
+            if (document.body) {
+                new MutationObserver(function (mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                        if (mutations[i].addedNodes && mutations[i].addedNodes.length) { schedule(); return; }
+                    }
+                }).observe(document.body, { childList: true, subtree: true });
+            }
+            labelize();
+        })();
+    </script>
 
     @livewireScriptConfig
 </body>

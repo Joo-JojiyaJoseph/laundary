@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Orders;
 
 use App\Enums\OrderStatus;
+use App\Livewire\Concerns\WithDateFilter;
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,6 +11,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+    use WithDateFilter;
 
     public string $search = "";
     public string $statusFilter = "";
@@ -41,6 +43,7 @@ class Index extends Component
                         ->orWhere("mobile", "like", "%{$this->search}%"))))
                 ->when($this->statusFilter, fn ($q) => $q->where("status", $this->statusFilter))
                 ->when($this->paymentFilter, fn ($q) => $q->where("payment_status", $this->paymentFilter))
+                ->tap(fn ($q) => $this->applyDateFilter($q))
                 ->latest()
                 ->paginate(15),
             "statuses" => OrderStatus::cases(),

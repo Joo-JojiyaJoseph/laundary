@@ -7,7 +7,7 @@
         <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search categories…" class="input max-w-xs">
 
         <div class="mt-4 overflow-x-auto">
-            <table class="table-admin">
+            <table class="table-admin table-cards">
                 <thead><tr><th>Name</th><th>Items</th><th class="text-right">Actions</th></tr></thead>
                 <tbody>
                     @forelse ($categories as $category)

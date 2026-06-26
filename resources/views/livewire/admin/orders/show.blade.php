@@ -54,7 +54,7 @@
         <div class="glass rounded-3xl p-6" data-reveal>
             <h2 class="font-display text-lg font-semibold mb-4">Items ({{ $order->items->count() }})</h2>
             <div class="overflow-x-auto">
-                <table class="table-admin">
+                <table class="table-admin table-cards">
                     <thead><tr><th>Item</th><th>Tag</th><th>Qty</th><th>Price</th><th class="text-right">Total</th></tr></thead>
                     <tbody>
                         @foreach ($order->items as $item)

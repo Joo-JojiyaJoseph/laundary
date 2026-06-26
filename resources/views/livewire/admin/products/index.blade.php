@@ -21,7 +21,7 @@
         </div>
 
         <div class="mt-4 overflow-x-auto">
-            <table class="table-admin">
+            <table class="table-admin table-cards">
                 <thead><tr><th>Item</th><th>Service</th><th>Category</th><th>Base price</th><th>UOM</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
                 <tbody>
                     @forelse ($products as $product)

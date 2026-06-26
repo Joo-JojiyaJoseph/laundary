@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Payments;
 
+use App\Livewire\Concerns\WithDateFilter;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
@@ -11,8 +12,9 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+    use WithDateFilter;
 
-    public string $tab = "payments"; // payments|outstanding
+    public string $tab = "outstanding"; // outstanding|payments — outstanding shown first
     public string $search = "";
     public string $methodFilter = "";
 
@@ -102,6 +104,7 @@ class Index extends Component
                     ->whereHas("order", fn ($o) => $o->where("order_no", "like", "%{$this->search}%"))
                     ->orWhereHas("customer", fn ($c) => $c->where("name", "like", "%{$this->search}%"))))
                 ->when($this->methodFilter, fn ($q) => $q->where("method", $this->methodFilter))
+                ->tap(fn ($q) => $this->applyDateFilter($q))
                 ->latest()
                 ->paginate(15),
             "outstanding" => Order::with("customer")

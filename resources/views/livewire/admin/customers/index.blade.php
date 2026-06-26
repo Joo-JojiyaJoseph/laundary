@@ -3,19 +3,16 @@
         <button wire:click="create" class="btn-primary">+ New customer</button>
     </x-admin.page-header>
 
-    <div class="glass rounded-3xl p-5" data-reveal>
-        <!-- <div class="flex flex-wrap gap-3">
-            <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search name, mobile or code…" class="input max-w-xs">
-            <select wire:model.live="tierFilter" class="input max-w-40">
-                <option value="">All tiers</option>
-                <option value="silver">Silver</option>
-                <option value="gold">Gold</option>
-                <option value="platinum">Platinum</option>
-            </select>
-        </div> -->
+    <div class="glass rounded-3xl p-4 sm:p-5" data-reveal>
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <input type="search" wire:model.live.debounce.300ms="search" placeholder="Search name, mobile or code…" class="input sm:max-w-xs">
+            <div class="sm:ml-auto">
+                <x-admin.date-filter />
+            </div>
+        </div>
 
         <div class="mt-4 overflow-x-auto">
-            <table class="table-admin">
+            <table class="table-admin table-cards min-w-[720px]">
                 <thead><tr><th>Customer</th><th>Contact</th><th>City</th><th>Points</th><th>Orders</th><th class="text-right">Actions</th></tr></thead>
                 <tbody>
                     @forelse ($customers as $customer)
@@ -44,6 +41,7 @@
                             <td class="font-semibold">{{ number_format($customer->loyalty_points) }}</td>
                             <td><span class="badge badge-primary">{{ $customer->orders_count }}</span></td>
                             <td class="text-right space-x-1 whitespace-nowrap">
+                                <a href="{{ route('admin.customers.show', $customer->id) }}" class="btn-soft">View</a>
                                 <a href="https://wa.me/91{{ preg_replace('/\D/', '', $customer->mobile) }}" target="_blank" class="btn-soft">WhatsApp</a>
                                 <button wire:click="edit({{ $customer->id }})" class="btn-soft">Edit</button>
                                 <button @click="$dispatch('confirm', { title: 'Delete this?', message: 'Remove this customer? Their orders are kept.', confirmText: 'Yes, delete', method: 'delete', params: [{{ $customer->id }}] })" class="btn-danger-soft">Delete</button>

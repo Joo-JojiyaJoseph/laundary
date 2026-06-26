@@ -2,16 +2,24 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Concerns\WithDateFilter;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Rider;
 use App\Services\AI\AiInsightsService;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
+    use WithDateFilter;
+
+    public function mount(): void
+    {
+        // Dashboards read most naturally scoped to "today" by default.
+        $this->period = 'today';
+    }
+
     public function getListeners(): array
     {
         $branchId = auth()->user()->branch_id ?? 0;
@@ -22,12 +30,23 @@ class Dashboard extends Component
     {
         $branchId = auth()->user()->branch_id;
         $scope = fn ($q) => $branchId ? $q->where("branch_id", $branchId) : $q;
+        [$from, $to] = $this->dateRange();
+
+        // Apply the active period window to a query (no-op for "all time").
+        $inPeriod = fn ($q) => $q
+            ->when($from, fn ($w) => $w->where("created_at", ">=", $from))
+            ->when($to, fn ($w) => $w->where("created_at", "<=", $to));
 
         $stats = [
-            "orders_today"   => $scope(Order::whereDate("created_at", today()))->count(),
+            "orders_today"   => $inPeriod($scope(Order::query()))->count(),
             "pending"        => $scope(Order::whereNotIn("status", ["delivered"]))->count(),
-            "delivered"      => $scope(Order::where("status", "delivered")->whereDate("delivered_at", today()))->count(),
-            "revenue_today"  => (float) Payment::whereDate("created_at", today())
+            "delivered"      => $scope(Order::where("status", "delivered"))
+                ->when($from, fn ($w) => $w->where("delivered_at", ">=", $from))
+                ->when($to, fn ($w) => $w->where("delivered_at", "<=", $to))
+                ->count(),
+            "revenue_today"  => (float) Payment::query()
+                ->when($from, fn ($w) => $w->where("created_at", ">=", $from))
+                ->when($to, fn ($w) => $w->where("created_at", "<=", $to))
                 ->when($branchId, fn ($q) => $q->whereHas("order", fn ($o) => $o->where("branch_id", $branchId)))
                 ->sum("amount"),
             "customers"      => $scope(Customer::query())->count(),

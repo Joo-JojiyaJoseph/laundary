@@ -28,6 +28,11 @@ Route::middleware(["auth", "staff:super-admin|admin|branch-manager|counter-staff
         Route::get("/orders/{order}", App\Livewire\Admin\Orders\Show::class)->name("orders.show");
         Route::get("/payments", App\Livewire\Admin\Payments\Index::class)->name("payments.index");
         Route::get("/customers", App\Livewire\Admin\Customers\Index::class)->name("customers.index");
+        Route::get("/customers/{customer}", App\Livewire\Admin\Customers\Show::class)->name("customers.show");
+        Route::get("/feedback", App\Livewire\Admin\Feedback\Index::class)->name("feedback.index");
+
+        Route::get("/reports/orders", App\Livewire\Admin\Reports\Orders::class)->name("reports.orders");
+        Route::get("/reports/payments", App\Livewire\Admin\Reports\Payments::class)->name("reports.payments");
         Route::get("/services", App\Livewire\Admin\Services\Index::class)->name("services.index");
         Route::get("/categories", App\Livewire\Admin\Categories\Index::class)->name("categories.index");
         Route::get("/items", App\Livewire\Admin\Products\Index::class)->name("products.index");

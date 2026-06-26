@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Customers;
 
+use App\Livewire\Concerns\WithDateFilter;
 use App\Models\Branch;
 use App\Models\Customer;
 use Livewire\Component;
@@ -10,6 +11,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+    use WithDateFilter;
 
     public string $search = "";
     public string $tierFilter = "";
@@ -98,6 +100,7 @@ class Index extends Component
                     ->orWhere("mobile", "like", "%{$this->search}%")
                     ->orWhere("code", "like", "%{$this->search}%")))
                 ->when($this->tierFilter, fn ($q) => $q->where("loyalty_tier", $this->tierFilter))
+                ->tap(fn ($q) => $this->applyDateFilter($q))
                 ->latest()
                 ->paginate(12),
             "branches" => Branch::orderBy("name")->get(["id", "name"]),

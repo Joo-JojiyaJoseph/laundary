@@ -199,6 +199,18 @@
         </div>
     </section>
 
+    {{-- FEEDBACK / REVIEWS --}}
+    <section id="feedback" class="bg-gradient-to-b from-primary-50/40 to-white py-28">
+        <div class="mx-auto max-w-7xl px-6">
+            <div class="mx-auto mb-12 max-w-2xl text-center" data-reveal>
+                <p class="section-eyebrow center justify-center">Customer feedback</p>
+                <h2 class="mt-3 font-display text-4xl font-extrabold sm:text-5xl">What our customers say</h2>
+                <p class="mt-4 text-slate-500">Real reviews from real people — and we'd love to hear about your experience too.</p>
+            </div>
+            <livewire:public.feedback-section />
+        </div>
+    </section>
+
     {{-- CONTACT --}}
     <section id="contact" class="mx-auto max-w-7xl px-6 pb-28">
         <div class="grid gap-12 lg:grid-cols-2">
