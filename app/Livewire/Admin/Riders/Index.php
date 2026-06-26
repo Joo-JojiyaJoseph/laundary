@@ -57,29 +57,38 @@ class Index extends Component
             "branch_id" => "nullable|exists:branches,id",
         ]);
 
-        DB::transaction(function () use ($rider, $data) {
-            if ($rider) {
-                $rider->user->update(array_filter([
-                    "name" => $data["name"],
-                    "email" => $data["email"],
-                    "password" => $data["password"] ? Hash::make($data["password"]) : null,
-                ]));
-                $rider->update(["vehicle_number" => $data["vehicle_number"], "branch_id" => $data["branch_id"]]);
-            } else {
-                $user = User::create([
-                    "name" => $data["name"],
-                    "email" => $data["email"],
-                    "password" => Hash::make($data["password"]),
-                    "branch_id" => $data["branch_id"],
-                ]);
-                $user->assignRole("rider");
-                Rider::create([
-                    "user_id" => $user->id,
-                    "branch_id" => $data["branch_id"],
-                    "vehicle_number" => $data["vehicle_number"],
-                ]);
-            }
-        });
+        try {
+            DB::transaction(function () use ($rider, $data) {
+                if ($rider) {
+                    $rider->user->update(array_filter([
+                        "name" => $data["name"],
+                        "email" => $data["email"],
+                        "password" => $data["password"] ? Hash::make($data["password"]) : null,
+                    ]));
+                    $rider->update(["vehicle_number" => $data["vehicle_number"], "branch_id" => $data["branch_id"]]);
+                } else {
+                    $user = User::create([
+                        "name" => $data["name"],
+                        "email" => $data["email"],
+                        "password" => Hash::make($data["password"]),
+                        "branch_id" => $data["branch_id"],
+                    ]);
+                    $user->assignRole("rider");
+                    Rider::create([
+                        "user_id" => $user->id,
+                        "branch_id" => $data["branch_id"],
+                        "vehicle_number" => $data["vehicle_number"],
+                    ]);
+                }
+            });
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("email", "This rider could not be saved — the email may already be in use.");
+            return;
+        } catch (\Throwable $e) {
+            report($e);
+            $this->addError("email", "Something went wrong saving this rider. Please try again.");
+            return;
+        }
 
         $this->showModal = false;
         $this->dispatch("notify", type: "success", message: "Rider saved.");

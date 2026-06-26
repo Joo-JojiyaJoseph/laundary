@@ -68,13 +68,20 @@ class Terminal extends Component
         $this->validate([
             "newName" => "required|string|min:2|max:120",
             "newMobile" => "required|string|min:8|max:15|unique:customers,mobile",
-        ], [], ["newName" => "name", "newMobile" => "mobile"]);
+        ], [
+            "newMobile.unique" => "A customer with this mobile number already exists.",
+        ], ["newName" => "name", "newMobile" => "mobile"]);
 
-        $customer = \App\Models\Customer::create([
-            "name" => $this->newName,
-            "mobile" => $this->newMobile,
-            "branch_id" => auth()->user()->branch_id,
-        ]);
+        try {
+            $customer = \App\Models\Customer::create([
+                "name" => $this->newName,
+                "mobile" => $this->newMobile,
+                "branch_id" => auth()->user()->branch_id,
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("newMobile", "This customer could not be added — they may already exist.");
+            return;
+        }
 
         $this->customerId = $customer->id;
         $this->reset(["newName", "newMobile", "showQuickAdd", "customerSearch"]);

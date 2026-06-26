@@ -72,7 +72,13 @@ class Index extends Component
         if ($data["type"] !== "branch") $data["branch_id"] = $this->branch_id; // optional scoping
         if ($data["type"] !== "customer") $data["customer_id"] = null;
 
-        PriceList::updateOrCreate(["id" => $this->editingId], $data);
+        try {
+            PriceList::updateOrCreate(["id" => $this->editingId], $data);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("price", "This price rule could not be saved. Please try again.");
+            return;
+        }
+
         $this->showModal = false;
         $this->dispatch("notify", type: "success", message: "Price rule saved.");
     }

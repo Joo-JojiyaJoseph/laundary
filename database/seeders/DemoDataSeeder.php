@@ -154,6 +154,21 @@ class DemoDataSeeder extends Seeder
             }
         }
 
+        // ── Verified customer feedback (shown on the public site) ──────
+        $reviews = [
+            ["Anjali Menon", "9847012345", 5, "Picked up, washed and delivered next day — my kasavu saree came back spotless. Love the live tracking!"],
+            ["Rahul Nair", "9847022345", 5, "Best laundry service in Ernakulam. The steam ironing is crisp and the staff are super friendly."],
+            ["Fathima K", "9847032345", 4, "Very convenient doorstep pickup. Slightly pricey but the quality is worth it."],
+            ["Joseph Thomas", "9847042345", 5, "Tracked my order from pickup to delivery on my phone. Felt premium. Highly recommend."],
+            ["Lakshmi R", "9847052345", 5, "They removed a curry stain I thought was permanent. Brilliant work!"],
+        ];
+        foreach ($reviews as [$name, $mobile, $rating, $message]) {
+            \App\Models\Feedback::firstOrCreate(
+                ["mobile" => $mobile, "message" => $message],
+                ["name" => $name, "rating" => $rating, "is_verified" => true, "is_approved" => true, "verified_at" => now()->subDays(random_int(1, 30))]
+            );
+        }
+
         $this->command?->info("Demo data ready: " . Order::count() . " orders, " . Payment::count() . " payments, " . Customer::count() . " customers.");
     }
 }

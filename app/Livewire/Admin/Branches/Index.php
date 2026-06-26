@@ -61,7 +61,13 @@ class Index extends Component
             $data["code"] = "BR-" . strtoupper(Str::random(4));
         }
 
-        Branch::updateOrCreate(["id" => $this->editingId], $data);
+        try {
+            Branch::updateOrCreate(["id" => $this->editingId], $data);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $this->addError("name", "This branch could not be saved. Please try again.");
+            return;
+        }
+
         $this->showModal = false;
         $this->dispatch("notify", type: "success", message: "Branch saved.");
     }
