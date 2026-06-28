@@ -157,7 +157,7 @@
     </header>
 
     <header class="absolute top-0 left-0 right-0 z-30">
-        <nav class="max-w-[1920px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-20 py-6" aria-label="Primary navigation">
+        <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-6" aria-label="Primary navigation">
             <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-white">Laundrix</a>
 
             <ul class="hidden lg:flex items-center gap-10 text-sm font-medium text-white/90">
@@ -289,7 +289,7 @@
     </footer> --}}
 
     <footer class="bg-[#111111] text-white/70">
-        <div class="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-20 py-16">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
                 <div>
                     <p class="font-serif text-white text-2xl mb-4">Laundrix</p>
