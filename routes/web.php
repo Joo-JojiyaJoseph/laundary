@@ -2,12 +2,15 @@
 
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Pos\Terminal;
+use App\Livewire\Public\Home;
 use App\Livewire\Public\HomePage;
 use App\Livewire\Track\OrderTracker;
 use Illuminate\Support\Facades\Route;
 
 // ── Public website ────────────────────────────────────────────────
 Route::get("/", HomePage::class)->name("home");
+
+Route::get("/home", Home::class)->name("home.test");
 
 // Single-page site: old URLs land on their section
 Route::get("/about", fn () => redirect("/#about"))->name("about");
