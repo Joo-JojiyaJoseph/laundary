@@ -60,7 +60,7 @@
 <body class="min-h-screen bg-white font-body text-text antialiased">
 
     {{-- ── Nav ──────────────────────────────────────────────── --}}
-    <header class="fixed inset-x-0 top-0 z-50" x-data="{ open: false, scrolled: false }" x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 40)">
+    <header class="hidden fixed inset-x-0 top-0 z-50" x-data="{ open: false, scrolled: false }" x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 40)">
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 transition-all duration-300"
             :class="scrolled ? 'mt-0 bg-white/90 shadow-soft backdrop-blur-xl' : 'mt-2 bg-transparent'">
             <a href="{{ url('/') }}" class="flex items-center gap-2.5">
@@ -156,11 +156,41 @@
         </nav>
     </header>
 
+    <header class="absolute top-0 left-0 right-0 z-30">
+        <nav class="max-w-[1920px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-20 py-6" aria-label="Primary navigation">
+            <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-white">Laundrix</a>
+
+            <ul class="hidden lg:flex items-center gap-10 text-sm font-medium text-white/90">
+                <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+                <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                <li><a href="#track-order" class="hover:text-white transition-colors">Track Order</a></li>
+                <li><a href="#reviews" class="hover:text-white transition-colors">Reviews</a></li>
+                <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+
+            <a href="#sign-in"
+               class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2 hover:bg-white hover:text-[#1F1F1F] transition-colors">
+                Sign In
+            </a>
+
+            {{-- Mobile menu button (static markup only — no JS per spec) --}}
+            <button type="button" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/70 text-white" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+    
+
     <main>{{ $slot }}</main>
 
     {{-- ── WhatsApp float ───────────────────────────────────── --}}
     <a href="https://wa.me/919000000000" target="_blank" rel="noopener"
-        class="fixed bottom-24 right-6 z-40 grid h-13 w-13 place-items-center rounded-full bg-[#25D366] p-3.5 text-white shadow-float transition hover:scale-110"
+        class="hidden fixed bottom-24 right-6 z-40 grid h-13 w-13 place-items-center rounded-full bg-[#25D366] p-3.5 text-white shadow-float transition hover:scale-110"
         aria-label="Chat on WhatsApp">
         <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -169,7 +199,7 @@
     </a>
 
     {{-- ── Footer ───────────────────────────────────────────── --}}
-    {{-- ── Footer ───────────────────────────────────────────── --}}
+    {{-- ── Footer ─────────────────────────────────────────────
     <footer class="relative overflow-hidden bg-[#0b1220] text-slate-300">
         <div class="bubbles opacity-40" aria-hidden="true">
             @for ($i = 0; $i < 7; $i++)
@@ -253,6 +283,63 @@
                             <span class="text-xs font-bold uppercase">{{ substr($n, 0, 1) }}</span>
                         </a>
                     @endforeach
+                </div>
+            </div>
+        </div>
+    </footer> --}}
+
+    <footer class="bg-[#111111] text-white/70">
+        <div class="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-20 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <p class="font-serif text-white text-2xl mb-4">Laundrix</p>
+                    <p class="text-sm max-w-sm leading-relaxed">
+                        Kerala's modern laundry &amp; dry-cleaning network-precision, convenience, and a finish that feels premium.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+                    <div>
+                        <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">About</p>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#about" class="hover:text-white transition-colors">Our Story</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">Services</p>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#services" class="hover:text-white transition-colors">Dry Cleaning</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors">Wash &amp; Fold</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors">Premium Laundry</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">Quick Links</p>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#track-order" class="hover:text-white transition-colors">Track Order</a></li>
+                            <li><a href="#reviews" class="hover:text-white transition-colors">Reviews</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">Connect</p>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">LinkedIn</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+                <p>© {{ date('Y') }} Laundrix. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookies</a>
                 </div>
             </div>
         </div>

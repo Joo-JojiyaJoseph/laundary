@@ -89,24 +89,67 @@
     {{-- ============================================================ --}}
     {{-- STAT CARDS --}}
     {{-- ============================================================ --}}
-    <section class="bg-[#FAFAF8] mt-20">
-        <div class="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-20 mt-8 sm:-mt-10 relative z-10 pb-16 lg:pb-24">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-                <div class="bg-white rounded-2xl border border-[#E6E6E6] shadow-sm px-7 py-6">
-                    <p class="font-serif text-3xl mb-2">48,000+</p>
-                    <p class="text-sm text-[#6B6B6B]">Garments processed with precision every month.</p>
+    <section class="bg-[#FAFAF8] py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+            <!-- Card 1 -->
+            <div class="bg-white border border-[#E7E3DD] p-8 min-h-[200px] flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-[1px] bg-[#E8883E]"></span>
+                    <span class="text-[11px] uppercase tracking-[0.22em] text-[#E8883E] font-semibold">
+                        Monthly
+                    </span>
                 </div>
-                <div class="bg-white rounded-2xl border border-[#E6E6E6] shadow-sm px-7 py-6">
-                    <p class="font-serif text-3xl mb-2">120+</p>
-                    <p class="text-sm text-[#6B6B6B]">Partner stores across Kerala, unified by one standard.</p>
-                </div>
-                <div class="bg-white rounded-2xl border border-[#E6E6E6] shadow-sm px-7 py-6">
-                    <p class="font-serif text-3xl mb-2">98%</p>
-                    <p class="text-sm text-[#6B6B6B]">On-time delivery rate-built for your schedule.</p>
-                </div>
+
+                <h3 class="font-serif text-[52px] leading-none text-[#2B2B2B]">
+                    48,000+
+                </h3>
+
+                <p class="mt-5 text-[15px] leading-7 text-[#787878]">
+                    Garments processed with precision every month.
+                </p>
             </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white border border-[#E7E3DD] p-8 min-h-[200px] flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-[1px] bg-[#E8883E]"></span>
+                    <span class="text-[11px] uppercase tracking-[0.22em] text-[#E8883E] font-semibold">
+                        Network
+                    </span>
+                </div>
+
+                <h3 class="font-serif text-[52px] leading-none text-[#2B2B2B]">
+                    120+
+                </h3>
+
+                <p class="mt-5 text-[15px] leading-7 text-[#787878]">
+                    Partner stores across Kerala, unified by one standard.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white border border-[#E7E3DD] p-8 min-h-[200px] flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-[1px] bg-[#E8883E]"></span>
+                    <span class="text-[11px] uppercase tracking-[0.22em] text-[#E8883E] font-semibold">
+                        Delivery
+                    </span>
+                </div>
+
+                <h3 class="font-serif text-[52px] leading-none text-[#2B2B2B]">
+                    98%
+                </h3>
+
+                <p class="mt-5 text-[15px] leading-7 text-[#787878]">
+                    On-time delivery rate built for your schedule.
+                </p>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     {{-- ============================================================ --}}
     {{-- WHY LAUNDRIX --}}
@@ -181,15 +224,8 @@
                 </div>
 
                 {{-- Image collage --}}
-                <div class="grid grid-cols-3 grid-rows-2 gap-3 h-[280px] sm:h-[340px] lg:h-[380px]">
-                    <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=800&auto=format&fit=crop"
-                        alt="Folded laundry being carried" class="col-span-1 row-span-2 w-full h-full object-cover rounded-xl">
-                    <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?q=80&w=800&auto=format&fit=crop"
-                        alt="Washing machine in a bright laundromat" class="col-span-2 row-span-1 w-full h-full object-cover rounded-xl">
-                    <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=800&auto=format&fit=crop"
-                        alt="Laundry attendant smiling while sorting clothes" class="col-span-1 row-span-1 w-full h-full object-cover rounded-xl">
-                    <img src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=800&auto=format&fit=crop"
-                        alt="Neatly hung shirts" class="col-span-1 row-span-1 w-full h-full object-cover rounded-xl">
+                <div class="w-full h-full rounded-2xl">
+                    <img src="/images/home/about-image.svg" alt="">
                 </div>
             </div>
         </div>
@@ -206,12 +242,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 @php
                 $services = [
-                ['title' => 'Dry Cleaning', 'img' => 'https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?q=80&w=900&auto=format&fit=crop'],
-                ['title' => 'Wash & Fold', 'img' => 'https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=900&auto=format&fit=crop'],
-                ['title' => 'Premium Laundry', 'img' => 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=900&auto=format&fit=crop'],
-                ['title' => 'Steam Ironing', 'img' => 'https://images.unsplash.com/photo-1632933296211-a30f0813cd72?q=80&w=900&auto=format&fit=crop'],
-                ['title' => 'Shoe Cleaning', 'img' => 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=900&auto=format&fit=crop'],
-                ['title' => 'Curtain Cleaning', 'img' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=900&auto=format&fit=crop'],
+                ['title' => 'Dry Cleaning', 'img' => '/images/home/image 4.svg'],
+                ['title' => 'Wash & Fold', 'img' => '/images/home/image.svg'],
+                ['title' => 'Premium Laundry', 'img' => '/images/home/image (1).svg'],
+                ['title' => 'Steam Ironing', 'img' => '/images/home/image (2).svg'],
+                ['title' => 'Shoe Cleaning', 'img' => '/images/home/image (3).svg'],
+                ['title' => 'Curtain Cleaning', 'img' => '/images/home/image (4).svg'],
                 ];
                 @endphp
 
@@ -307,7 +343,7 @@
     {{-- ============================================================ --}}
     <section class="relative">
         <div class="relative h-[360px] sm:h-[420px] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2400&auto=format&fit=crop"
+            <img src="/images/home/000edd5bad91fae89ec9bd0682080f3a7a9437e3.png"
                 alt="Stack of folded towels" class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/65"></div>
 
