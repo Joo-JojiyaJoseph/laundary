@@ -319,6 +319,7 @@
             <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Track Your Order</p>
             <h2 class="font-serif text-3xl sm:text-4xl mb-10">Where is your order?</h2>
 
+            {{-- 
             <form class="w-full max-w-2xl bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-10 text-left">
                 <h3 class="font-serif text-lg mb-6">Track your order</h3>
 
@@ -338,7 +339,8 @@
                 <p class="text-xs text-[#6B6B6B] text-start">
                     Need help? <a href="#contact" class="text-[#1F1F1F] font-medium underline-offset-2 hover:underline">Contact support →</a>
                 </p>
-            </form>
+            </form>  --}}
+             <livewire:track.track-lookup-form />
         </div>
     </section>
 
