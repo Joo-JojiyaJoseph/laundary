@@ -156,7 +156,7 @@
         </nav>
     </header>
 
-    <header class="absolute top-0 left-0 right-0 z-30">
+    <header class="absolute top-0 left-0 right-0 z-30" x-data="{ open: false }" @keydown.escape.window="open = false">
         <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-6" aria-label="Primary navigation">
             <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-white">Laundrix</a>
 
@@ -169,20 +169,55 @@
                 <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
             </ul>
 
-            <a href="\login"
-               class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2 hover:bg-white hover:text-[#1F1F1F] transition-colors">
+            <a href="/login"
+               class="hidden sm:inline-flex lg:items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2 hover:bg-white hover:text-[#1F1F1F] transition-colors">
                 Sign In
             </a>
 
-            {{-- Mobile menu button (static markup only — no JS per spec) --}}
-            <button type="button" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/70 text-white" aria-label="Open menu">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            {{-- Mobile menu toggle --}}
+            <button type="button"
+                    @click="open = !open"
+                    :aria-expanded="open"
+                    class="lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/70 text-white shrink-0"
+                    aria-label="Open menu">
+                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"/>
                     <line x1="3" y1="12" x2="21" y2="12"/>
                     <line x1="3" y1="18" x2="21" y2="18"/>
                 </svg>
+                <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
             </button>
         </nav>
+
+        {{-- Mobile menu panel --}}
+        <div x-show="open"
+             x-cloak
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             @click.outside="open = false"
+             class="lg:hidden bg-[#1F1F1F]/95 backdrop-blur-md border-t border-white/10">
+            <ul class="flex flex-col text-sm font-medium text-white/90 px-6 py-4">
+                <li><a href="#home" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Home</a></li>
+                <li><a href="#about" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">About</a></li>
+                <li><a href="#services" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Services</a></li>
+                <li><a href="#track-order" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Track Order</a></li>
+                <li><a href="#reviews" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Reviews</a></li>
+                <li><a href="#contact" @click="open = false" class="block py-3 hover:text-white transition-colors">Contact</a></li>
+            </ul>
+            <div class="px-6 pb-6 sm:hidden">
+                <a href="/login" @click="open = false"
+                   class="inline-flex w-full items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2.5 hover:bg-white hover:text-[#1F1F1F] transition-colors">
+                    Sign In
+                </a>
+            </div>
+        </div>
     </header>
     
 

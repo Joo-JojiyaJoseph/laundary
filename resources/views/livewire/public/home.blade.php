@@ -43,11 +43,11 @@
             <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
 
             <div class="relative min-h-screen w-full px-6 md:px-10 lg:px-[80px] flex flex-col justify-center container mx-auto">
-                <div class="w-full lg:mt-28">
-                    <p class="text-[#E8883E] text-xs sm:text-sm tracking-[0.20em] uppercase mb-4">
+                <div class="w-full mt-10 lg:mt-28">
+                    <p class="text-[#E8883E] text-xs sm:text-sm tracking-[0.20em] uppercase mb-2 lg:mb-4">
                         Kerala's Modern Laundry Network
                     </p>
-                    <h1 class="font-serif text-white text-4xl lg:text-5xl xl:text-6xl leading-16 mb-6">
+                    <h1 class="font-serif text-white text-4xl lg:text-5xl xl:text-6xl leading-12 lg:leading-16 mb-6">
                         Quality Laundry<br>Every Thread
                     </h1>
                     <p class="text-white text-sm leading-relaxed mb-8 font-light font-sans">
@@ -69,16 +69,16 @@
                 <div class="pt-16">
                     <div class="grid grid-cols-3 gap-3 sm:gap-4 text-white w-full">
                         <div class="w-full border border-white/20 bg-white/[0.08] p-4 rounded-2xl backdrop-blur-2xl">
-                            <p class="text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">Garments / Month</p>
-                            <p class="font-serif text-xl sm:text-2xl">48,000+</p>
+                            <p class="text-[8px] lg:text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">Garments / Month</p>
+                            <p class="font-serif text-md sm:text-2xl">48,000+</p>
                         </div>
                         <div class="w-full border border-white/20 bg-white/[0.08] p-4 rounded-2xl backdrop-blur-2xl">
-                            <p class="text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">Partner Stores</p>
-                            <p class="font-serif text-xl sm:text-2xl">120+</p>
+                            <p class="text-[8px] lg:text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">Partner Stores</p>
+                            <p class="font-serif text-md sm:text-2xl">120+</p>
                         </div>
                         <div class="w-full border border-white/20 bg-white/[0.08] p-4 rounded-2xl backdrop-blur-2xl">
-                            <p class="text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">On-Time Delivery</p>
-                            <p class="font-serif text-xl sm:text-2xl">98%</p>
+                            <p class="text-[8px] lg:text-[10px] tracking-[0.15em] uppercase text-white/60 mb-1">On-Time Delivery</p>
+                            <p class="font-serif text-md sm:text-2xl">98%</p>
                         </div>
                     </div>
                 </div>
