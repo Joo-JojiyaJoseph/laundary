@@ -37,14 +37,13 @@
     {{-- ============================================================ --}}
     <section id="home" class="relative ">
         <div class="relative min-h-screen overflow-hidden">
-            <img src="/images/home/ded64d6282a3c67edffa1fcd2a1e90f03dc47e4a.jpg"
+            <img src="/images/home/laundry-landing.jpeg"
                 alt="Freshly folded towels in warm afternoon light"
-                class="absolute inset-0 w-full h-full object-cover -scale-x-100">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                class="absolute inset-0 w-full h-full object-cover ">
 
             <div class="relative min-h-screen w-full px-6 md:px-10 lg:px-[80px] flex flex-col justify-center container mx-auto">
                 <div class="w-full mt-10 lg:mt-28">
-                    <p class="text-[#E8883E] text-xs sm:text-sm tracking-[0.20em] uppercase mb-2 lg:mb-4">
+                    <p class="text-[#E8883E] text-xs sm:text-sm tracking-[0.20em] uppercase mb-2 lg:mb-4 font-semibold">
                         Kerala's Modern Laundry Network
                     </p>
                     <h1 class="text-white text-4xl lg:text-5xl xl:text-6xl leading-12 lg:leading-16 mb-6 !font-serif">
