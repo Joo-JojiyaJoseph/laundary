@@ -8,9 +8,9 @@ use App\Livewire\Track\OrderTracker;
 use Illuminate\Support\Facades\Route;
 
 // ── Public website ────────────────────────────────────────────────
-Route::get("/", HomePage::class)->name("home");
+// Route::get("/", HomePage::class)->name("home");
 
-Route::get("/home", Home::class)->name("home.test");
+Route::get("/", Home::class)->name("home.test");
 
 // Single-page site: old URLs land on their section
 Route::get("/about", fn () => redirect("/#about"))->name("about");
