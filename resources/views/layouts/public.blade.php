@@ -157,7 +157,7 @@
     </header>
 
     <header class="absolute top-0 left-0 right-0 z-30 bg-white w-full text-black" x-data="{ open: false }" @keydown.escape.window="open = false">
-        <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-4" aria-label="Primary navigation">
+        <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-3" aria-label="Primary navigation">
             <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-black">Laundrix</a>
 
             <ul class="hidden lg:flex items-center gap-10 text-sm font-medium text-white/90">
