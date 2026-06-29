@@ -322,7 +322,7 @@
 
             {{-- Approved reviews --}}
             @if ($reviewCount > 0)
-            <div class="mb-10 flex flex-col items-center gap-2 text-center">
+            <div class="mb-10 flex flex-col items-center gap-2 text-center hidden">
                 <div class="flex items-center gap-1">
                     @for ($i = 1; $i
                     <= 5; $i++)
@@ -335,7 +335,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-14">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-14 hidden">
                 @foreach ($reviews as $review)
                 <figure wire:key="rev-{{ $review->id }}" class="bg-white rounded-2xl border border-[#E6E6E6] p-7 flex h-full flex-col">
                     <div class="flex items-center gap-1">
@@ -359,7 +359,7 @@
             </div>
             @else
             <div class="mb-14 text-center text-[#6B6B6B]">
-                <x-icon name="chat-bubble-left-right" class="mx-auto h-10 w-10 text-[#E8883E]/60" />
+                <x-icon name="chat-bubble-left-right" class="mx-auto h-10 w-10 text-[#E8883E]/60 hidden" />
                 <p class="mt-3 text-sm">Be the first to share your experience with Laundrix.</p>
             </div>
             @endif
@@ -401,9 +401,9 @@
                             @error('ratingMessage') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
 
-                        <button class="w-full inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors" wire:loading.attr="disabled">
-                            <span wire:loading.remove wire:target="submit">Submit feedback →</span>
-                            <span wire:loading wire:target="submit" class="flex items-center gap-2">
+                        <button class="cursor-pointer w-full inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors" wire:loading.attr="disabled">
+                            <span wire:loading.remove wire:target="ratingSubmit">Submit feedback →</span>
+                            <span wire:loading wire:target="ratingSubmit" class="flex items-center gap-2">
                                 <span class="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span> Submitting…
                             </span>
                         </button>
@@ -478,22 +478,22 @@
             <h2 class="font-serif text-3xl sm:text-4xl mb-12">Consistently exceptional.</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 mb-10">
-                @php
+                <!-- @php
                 $testimonials = [
                 ['name' => 'Aisha N.', 'text' => "The attention to detail is incredible. My wool coats look brand new, and delivery is always on time."],
                 ['name' => 'Rohan M.', 'text' => "The best laundry experience in Kerala. The app is clean, the service is reliable, and the quality is consistently high."],
                 ['name' => 'Meera S.', 'text' => "The steam ironing is flawless. I use Laundrix for everything from everyday shirts to special occasion dresses."],
                 ];
-                @endphp
+                @endphp -->
 
-                @foreach ($testimonials as $t)
+                @foreach ($reviews as $t)
                 <article class="bg-white rounded-2xl border border-[#E6E6E6] p-7">
                     <span class="font-serif text-3xl text-[#E8883E] leading-none">"</span>
-                    <p class="text-sm text-[#3A3A3A] leading-relaxed mt-2 mb-6">{{ $t['text'] }}</p>
+                    <p class="text-sm text-[#3A3A3A] leading-relaxed mt-2 mb-6">{{ $t['message'] }}</p>
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-medium">{{ $t['name'] }}</p>
                         <div class="flex gap-0.5 text-[#C5A059]" aria-label="5 out of 5 stars">
-                            @for ($i = 0; $i < 5; $i++)
+                            @for ($i = 0; $i < $t->rating; $i++)
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7-5.4-4.7 7.1-.6z" />
                                 </svg>
@@ -634,7 +634,7 @@
                     <button
                         type="submit"
                         wire:loading.attr="disabled"
-                        class="w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                        class="mt-2 w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
 
                         <span wire:loading.remove wire:target="submit">
                             Send Message

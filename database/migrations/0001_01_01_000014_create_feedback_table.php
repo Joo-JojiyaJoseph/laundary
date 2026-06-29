@@ -9,13 +9,13 @@ return new class extends Migration {
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 120);
-            $table->string('mobile', 20)->index();
-            $table->unsignedTinyInteger('rating'); // 1..5
+            $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('name');
+            $table->unsignedTinyInteger('rating')->default(5); // 1..5
             $table->text('message');
-            $table->boolean('is_verified')->default(false); // phone-verified via OTP
-            $table->boolean('is_approved')->default(true);   // admin moderation flag
-            $table->timestamp('verified_at')->nullable();
+            $table->boolean('is_approved')->default(false)->index();
+            $table->timestamp('approved_at')->nullable();
+            $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

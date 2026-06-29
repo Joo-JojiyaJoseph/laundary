@@ -169,7 +169,7 @@
                 <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
             </ul>
 
-            <a href="#sign-in"
+            <a href="\login"
                class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2 hover:bg-white hover:text-[#1F1F1F] transition-colors">
                 Sign In
             </a>

@@ -11,35 +11,31 @@ use Livewire\Component;
 class Home extends Component
 {
 
-    #[Validate("required|min:2|max:80")]
     public string $name = "";
 
-    #[Validate("required|email")]
     public string $email = "";
 
-    #[Validate("required|min:8|max:15")]
     public string $phone = "";
 
-    #[Validate("required|min:10|max:2000")]
     public string $message = "";
 
 
-     #[Validate('required|min:2|max:80')]
     public string $ratingName = '';
 
-    #[Validate('required|integer|min:1|max:5')]
     public int $rating = 5;
 
-    #[Validate('required|min:10|max:1000')]
     public string $ratingMessage = '';
 
     public bool $submitted = false;
 
-
     // Rating
     public function ratingSubmit(): void
     {
-        $this->validate();
+        $this->validate([
+            'ratingName' => 'required|min:2|max:80',
+            'rating' => 'required|integer|min:1|max:5',
+            'ratingMessage' => 'required|min:10|max:1000',
+        ]);
 
         try {
             Feedback::create([
@@ -69,7 +65,12 @@ class Home extends Component
     // Email sending
     public function submit(): void
     {
-        $this->validate();
+        $this->validate([
+            'name' => 'required|min:2|max:80',
+            'email' => 'required|email',
+            'phone' => 'required|min:8|max:15',
+            'message' => 'required|min:10|max:2000',
+        ]);
 
         try {
             ContactMessage::create($this->only(["name", "email", "phone", "message"]));
@@ -83,7 +84,7 @@ class Home extends Component
 
     public function render()
     {
-        return view("livewire.public.home",[
+        return view("livewire.public.home", [
             'reviews' => Feedback::approved()->latest()->take(9)->get(),
             'averageRating' => round((float) Feedback::approved()->avg('rating'), 1),
             'reviewCount' => Feedback::approved()->count(),
