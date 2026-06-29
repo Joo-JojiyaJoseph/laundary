@@ -311,15 +311,118 @@
         </div>
     </section>
 
+    <section id="feedback" class="bg-[#FAFAF8]">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24">
+
+            <div data-reveal class="flex flex-col items-center text-center">
+                <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Customer Feedback</p>
+                <h2 class="font-serif text-3xl sm:text-4xl mb-4">What our customers say.</h2>
+                <p class="text-sm text-[#6B6B6B] max-w-xl mb-12">Real reviews from real people — and we'd love to hear about your experience too.</p>
+            </div>
+
+            {{-- Approved reviews --}}
+            @if ($reviewCount > 0)
+            <div class="mb-10 flex flex-col items-center gap-2 text-center">
+                <div class="flex items-center gap-1">
+                    @for ($i = 1; $i
+                    <= 5; $i++)
+                        <x-icon name="solid-star" class="h-5 w-5 {{ $i <= round($averageRating) ? 'text-[#C5A059]' : 'text-[#E6E6E6]' }}" />
+                    @endfor
+                </div>
+                <p class="text-sm text-[#6B6B6B]">
+                    <span class="font-semibold text-[#1F1F1F]">{{ number_format($averageRating, 1) }}</span> average from
+                    <span class="font-semibold text-[#1F1F1F]">{{ $reviewCount }}</span> happy {{ \Illuminate\Support\Str::plural('customer', $reviewCount) }}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-14">
+                @foreach ($reviews as $review)
+                <figure wire:key="rev-{{ $review->id }}" class="bg-white rounded-2xl border border-[#E6E6E6] p-7 flex h-full flex-col">
+                    <div class="flex items-center gap-1">
+                        @for ($i = 1; $i
+                        <= 5; $i++)
+                            <x-icon name="solid-star" class="h-3.5 w-3.5 {{ $i <= $review->rating ? 'text-[#C5A059]' : 'text-[#E6E6E6]' }}" />
+                        @endfor
+                    </div>
+                    <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-[#3A3A3A]">"{{ $review->message }}"</blockquote>
+                    <figcaption class="mt-5 flex items-center gap-3 border-t border-[#E6E6E6] pt-4">
+                        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#E8883E] text-sm font-semibold text-white">
+                            {{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($review->name, 0, 1)) }}
+                        </span>
+                        <div>
+                            <p class="text-sm font-medium text-[#1F1F1F]">{{ $review->name }}</p>
+                            <p class="text-xs text-[#6B6B6B]">{{ $review->created_at->format('d M Y') }}</p>
+                        </div>
+                    </figcaption>
+                </figure>
+                @endforeach
+            </div>
+            @else
+            <div class="mb-14 text-center text-[#6B6B6B]">
+                <x-icon name="chat-bubble-left-right" class="mx-auto h-10 w-10 text-[#E8883E]/60" />
+                <p class="mt-3 text-sm">Be the first to share your experience with Laundrix.</p>
+            </div>
+            @endif
+
+            {{-- Submit feedback --}}
+            <div class="mx-auto max-w-2xl">
+                <div class="bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-10">
+                    <h3 class="font-serif text-lg mb-1">Leave us your feedback</h3>
+                    <p class="text-sm text-[#6B6B6B] mb-6">No sign-up needed — your review goes live once our team approves it.</p>
+
+                    <form wire:submit="ratingSubmit" class="space-y-5">
+                        <div>
+                            <label class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Your name</label>
+                            <input type="text" wire:model="ratingName" placeholder="Anjali Menon"
+                                class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40">
+                            @error('ratingName') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Your rating</label>
+                            <div class="flex items-center gap-1.5" x-data="{ hover: 0 }">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" wire:click="$set('rating', {{ $i }})"
+                                    @mouseenter="hover = {{ $i }}" @mouseleave="hover = 0"
+                                    class="transition active:scale-90" aria-label="{{ $i }} star">
+                                    <x-icon name="solid-star" class="h-8 w-8"
+                                        ::class="(hover || {{ $rating }}) >= {{ $i }} ? 'text-[#C5A059]' : 'text-[#E6E6E6]'" />
+                                    </button>
+                                    @endfor
+                                    <span class="ml-2 text-sm font-medium text-[#6B6B6B]">{{ $rating }}/5</span>
+                            </div>
+                            @error('rating') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Your feedback</label>
+                            <textarea wire:model="ratingMessage" rows="4" placeholder="Tell us about your experience…"
+                                class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40"></textarea>
+                            @error('ratingMessage') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
+                        <button class="w-full inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors" wire:loading.attr="disabled">
+                            <span wire:loading.remove wire:target="submit">Submit feedback →</span>
+                            <span wire:loading wire:target="submit" class="flex items-center gap-2">
+                                <span class="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span> Submitting…
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     {{-- ============================================================ --}}
     {{-- TRACK ORDER --}}
     {{-- ============================================================ --}}
     <section id="track-order" class="bg-[#F3F2EF]">
-        <div class="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[120px] py-16 lg:py-24 flex flex-col items-center text-center">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24 flex flex-col items-center text-center">
             <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Track Your Order</p>
             <h2 class="font-serif text-3xl sm:text-4xl mb-10">Where is your order?</h2>
 
-            {{-- 
+            {{--
             <form class="w-full max-w-2xl bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-10 text-left">
                 <h3 class="font-serif text-lg mb-6">Track your order</h3>
 
@@ -454,24 +557,93 @@
                 </div>
 
                 {{-- Contact form --}}
-                <form class="bg-[#2A2A2A] rounded-2xl p-8">
-                    <h3 class="font-serif text-white text-xl mb-6">Send a message</h3>
+                <form wire:submit="submit" class="bg-[#2A2A2A] rounded-2xl p-8">
+                    <h3 class="font-serif text-white text-xl mb-6">
+                        Send a message
+                    </h3>
 
-                    <label for="name" class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your name"
-                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm mb-5 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50">
+                    {{-- Name --}}
+                    <label for="name"
+                        class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2">
+                        Name
+                    </label>
 
-                    <label for="email" class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2">Email</label>
-                    <input type="email" id="email" name="email" placeholder="you@email.com"
-                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm mb-5 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50">
+                    <input
+                        type="text"
+                        id="name"
+                        wire:model="name"
+                        placeholder="Your name"
+                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50">
 
-                    <label for="message" class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="How can we help?"
-                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm mb-6 placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50"></textarea>
+                    @error('name')
+                    <p class="mt-2 mb-5 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
 
-                    <button type="submit"
-                        class="w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors">
-                        Send Message
+                    {{-- Mobile --}}
+                    <label for="phone"
+                        class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2 mt-5">
+                        Mobile
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        wire:model="phone"
+                        placeholder="98470 12345"
+                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50">
+
+                    @error('phone')
+                    <p class="mt-2 mb-5 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+
+                    {{-- Email --}}
+                    <label for="email"
+                        class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2 mt-5">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        wire:model="email"
+                        placeholder="you@email.com"
+                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50">
+
+                    @error('email')
+                    <p class="mt-2 mb-5 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+
+                    {{-- Message --}}
+                    <label for="message"
+                        class="block text-[10px] tracking-[0.1em] uppercase text-white/50 mb-2 mt-5">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        wire:model="message"
+                        rows="4"
+                        placeholder="How can we help?"
+                        class="w-full rounded-xl bg-[#1F1F1F] border border-white/10 text-white px-4 py-3.5 text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#E8883E]/50"></textarea>
+
+                    @error('message')
+                    <p class="mt-2 mb-6 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+
+                    {{-- Submit Button --}}
+                    <button
+                        type="submit"
+                        wire:loading.attr="disabled"
+                        class="w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+
+                        <span wire:loading.remove wire:target="submit">
+                            Send Message
+                        </span>
+
+                        <span wire:loading wire:target="submit" class="flex items-center justify-center gap-2">
+                            <span class="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
+                            Sending...
+                        </span>
                     </button>
                 </form>
             </div>
