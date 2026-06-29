@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 // ── Public website ────────────────────────────────────────────────
 // Route::get("/", HomePage::class)->name("home");
 
-Route::get("/", Home::class)->name("home.test");
+Route::get("/", Home::class)->name("home");
 
 // Single-page site: old URLs land on their section
 Route::get("/about", fn () => redirect("/#about"))->name("about");
