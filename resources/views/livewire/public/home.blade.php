@@ -155,7 +155,7 @@
     {{-- WHY LAUNDRIX --}}
     {{-- ============================================================ --}}
     <section class="bg-[#F3F2EF]">
-        <div class="py-16 lg:py-24 container mx-auto px-6 md:px-10 lg:px-[80px]">
+        <div class="py-16 lg:py-20 container mx-auto px-6 md:px-10 lg:px-[80px]">
             <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Why Laundrix</p>
             <h2 class="font-serif text-3xl sm:text-4xl mb-12">Designed for the way you live.</h2>
 
@@ -208,7 +208,7 @@
     {{-- OUR STORY --}}
     {{-- ============================================================ --}}
     <section id="about" class="bg-[#FAFAF8] container mx-auto px-6 md:px-10 lg:px-[80px]">
-        <div class="py-16 lg:py-24">
+        <div class="py-16 lg:py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 {{-- Text --}}
                 <div>
@@ -276,7 +276,7 @@
     {{-- HOW IT WORKS --}}
     {{-- ============================================================ --}}
     <section class="bg-[#FAFAF8] container mx-auto px-6 md:px-10 lg:px-[80px]">
-        <div class=" py-16 lg:py-24">
+        <div class=" py-16 lg:py-20">
             <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">How It Works</p>
             <h2 class="font-serif text-3xl sm:text-4xl mb-14">Simple, seamless, and completely transparent.</h2>
 
@@ -311,8 +311,66 @@
         </div>
     </section>
 
+    
+
+    {{-- ============================================================ --}}
+    {{-- TRACK ORDER --}}
+    {{-- ============================================================ --}}
+    <section id="track-order" class="bg-[#F3F2EF]">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-20 flex flex-col items-center text-center">
+            <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Track Your Order</p>
+            <h2 class="font-serif text-3xl sm:text-4xl mb-10">Where is your order?</h2>
+
+            {{--
+            <form class="w-full max-w-2xl bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-10 text-left">
+                <h3 class="font-serif text-lg mb-6">Track your order</h3>
+
+                <label for="invoice_number" class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Invoice Number</label>
+                <input type="text" id="invoice_number" name="invoice_number" placeholder="Enter invoice number"
+                    class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm mb-5 placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40">
+
+                <label for="mobile_number" class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Mobile Number</label>
+                <input type="tel" id="mobile_number" name="mobile_number" placeholder="+91 000 000 0000"
+                    class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm mb-6 placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40">
+
+                <button type="submit"
+                    class="w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors mb-4">
+                    Track Order
+                </button>
+
+                <p class="text-xs text-[#6B6B6B] text-start">
+                    Need help? <a href="#contact" class="text-[#1F1F1F] font-medium underline-offset-2 hover:underline">Contact support →</a>
+                </p>
+            </form>  --}}
+             <livewire:track.track-lookup-form />
+        </div>
+    </section>
+
+    {{-- ============================================================ --}}
+    {{-- CTA BANNER --}}
+    {{-- ============================================================ --}}
+    <section class="relative ">
+        <div class="relative h-[360px] lg:h-[640px] overflow-hidden">
+            <img src="/images/home/000edd5bad91fae89ec9bd0682080f3a7a9437e3.png"
+                alt="Stack of folded towels" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/65"></div>
+
+            <div class="lg:mt-10 relative h-full px-6 flex flex-col items-center justify-center lg:justify-start text-center lg:py-20">
+                <h2 class="font-serif text-white text-3xl sm:text-4xl lg:text-6xl leading-tight mb-4">Your Clothes Deserve Better <br class="hidden lg:flex"> Care.</h2>
+                <p class="text-white/80 text-sm mb-8">
+                    Experience Kerala's modern laundry network-precision, convenience, and a finish <br class="hidden lg:flex">that feels premium.
+                </p>
+                <a href="#track-order"
+                    class="lg:mt-15 xl:mt-20 inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm font-semibold px-7 py-4 hover:bg-[#d97a30] transition-colors">
+                    Book Free Pickup
+                </a>
+            </div>
+        </div>
+    </section>
+
+
     <section id="feedback" class="bg-[#FAFAF8]">
-        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-20">
 
             <div data-reveal class="flex flex-col items-center text-center">
                 <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Customer Feedback</p>
@@ -415,65 +473,10 @@
     </section>
 
     {{-- ============================================================ --}}
-    {{-- TRACK ORDER --}}
-    {{-- ============================================================ --}}
-    <section id="track-order" class="bg-[#F3F2EF]">
-        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24 flex flex-col items-center text-center">
-            <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">Track Your Order</p>
-            <h2 class="font-serif text-3xl sm:text-4xl mb-10">Where is your order?</h2>
-
-            {{--
-            <form class="w-full max-w-2xl bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-10 text-left">
-                <h3 class="font-serif text-lg mb-6">Track your order</h3>
-
-                <label for="invoice_number" class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Invoice Number</label>
-                <input type="text" id="invoice_number" name="invoice_number" placeholder="Enter invoice number"
-                    class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm mb-5 placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40">
-
-                <label for="mobile_number" class="block text-[10px] tracking-[0.1em] uppercase text-[#6B6B6B] mb-2">Mobile Number</label>
-                <input type="tel" id="mobile_number" name="mobile_number" placeholder="+91 000 000 0000"
-                    class="w-full rounded-xl border border-[#E6E6E6] px-4 py-3.5 text-sm mb-6 placeholder:text-[#A8A8A8] focus:outline-none focus:ring-2 focus:ring-[#E8883E]/40">
-
-                <button type="submit"
-                    class="w-full rounded-full bg-[#E8883E] text-white text-sm font-semibold py-4 hover:bg-[#d97a30] transition-colors mb-4">
-                    Track Order
-                </button>
-
-                <p class="text-xs text-[#6B6B6B] text-start">
-                    Need help? <a href="#contact" class="text-[#1F1F1F] font-medium underline-offset-2 hover:underline">Contact support →</a>
-                </p>
-            </form>  --}}
-             <livewire:track.track-lookup-form />
-        </div>
-    </section>
-
-    {{-- ============================================================ --}}
-    {{-- CTA BANNER --}}
-    {{-- ============================================================ --}}
-    <section class="relative ">
-        <div class="relative h-[360px] lg:h-[640px] overflow-hidden">
-            <img src="/images/home/000edd5bad91fae89ec9bd0682080f3a7a9437e3.png"
-                alt="Stack of folded towels" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/65"></div>
-
-            <div class="lg:mt-10 relative h-full px-6 flex flex-col items-center justify-center lg:justify-start text-center lg:py-20">
-                <h2 class="font-serif text-white text-3xl sm:text-4xl lg:text-6xl leading-tight mb-4">Your Clothes Deserve Better <br class="hidden lg:flex"> Care.</h2>
-                <p class="text-white/80 text-sm mb-8">
-                    Experience Kerala's modern laundry network-precision, convenience, and a finish <br class="hidden lg:flex">that feels premium.
-                </p>
-                <a href="#track-order"
-                    class="lg:mt-15 xl:mt-20 inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm font-semibold px-7 py-4 hover:bg-[#d97a30] transition-colors">
-                    Book Free Pickup
-                </a>
-            </div>
-        </div>
-    </section>
-
-    {{-- ============================================================ --}}
     {{-- TESTIMONIALS --}}
     {{-- ============================================================ --}}
     <section id="reviews" class="bg-[#FAFAF8]">
-        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-20">
             <p class="text-[#E8883E] text-xs font-semibold tracking-[0.15em] uppercase mb-3">What Our Customers Say</p>
             <h2 class="font-serif text-3xl sm:text-4xl mb-12">Consistently exceptional.</h2>
 
@@ -521,7 +524,7 @@
     {{-- CONTACT --}}
     {{-- ============================================================ --}}
     <section id="contact" class="bg-[#1F1F1F]">
-        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-24">
+        <div class="container mx-auto px-6 md:px-10 lg:px-[80px] py-16 lg:py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
                 {{-- Contact info --}}
                 <div>

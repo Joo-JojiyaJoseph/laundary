@@ -36,6 +36,6 @@ class OrderTracker extends Component
             "order" => $order,
             "pipeline" => OrderStatus::pipeline(),
             "reached" => $order->statusLogs->pluck("created_at", "status"),
-        ])->layout("layouts.public", ["title" => "Track {$order->order_no} — Laundrix"]);
+        ])->layout("layouts.track", ["title" => "Track {$order->order_no} — Laundrix"]);
     }
 }

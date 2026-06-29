@@ -156,21 +156,21 @@
         </nav>
     </header>
 
-    <header class="absolute top-0 left-0 right-0 z-30" x-data="{ open: false }" @keydown.escape.window="open = false">
-        <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-6" aria-label="Primary navigation">
-            <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-white">Laundrix</a>
+    <header class="absolute top-0 left-0 right-0 z-30 bg-white w-full text-black" x-data="{ open: false }" @keydown.escape.window="open = false">
+        <nav class="container mx-auto px-6 md:px-10 lg:px-[80px] flex items-center justify-between py-4" aria-label="Primary navigation">
+            <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-black">Laundrix</a>
 
             <ul class="hidden lg:flex items-center gap-10 text-sm font-medium text-white/90">
-                <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
-                <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
-                <li><a href="#track-order" class="hover:text-white transition-colors">Track Order</a></li>
-                <li><a href="#reviews" class="hover:text-white transition-colors">Reviews</a></li>
-                <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#home" class="text-black transition-colors font-medium">Home</a></li>
+                <li><a href="#about" class="text-black transition-colors font-medium">About</a></li>
+                <li><a href="#services" class="text-black transition-colors font-medium">Services</a></li>
+                <li><a href="#track-order" class="text-black transition-colors font-medium">Track Order</a></li>
+                <li><a href="#reviews" class="text-black transition-colors font-medium">Reviews</a></li>
+                <li><a href="#contact" class="text-black transition-colors font-medium">Contact</a></li>
             </ul>
 
             <a href="/login"
-               class="hidden sm:inline-flex lg:items-center justify-center rounded-full border border-white/70 text-white text-sm font-medium px-5 py-2 hover:bg-white hover:text-[#1F1F1F] transition-colors">
+               class="hidden sm:inline-flex lg:items-center justify-center rounded-full border border-black/70 text-black hover:text-white text-sm font-medium px-5 py-2 hover:bg-black transition-colors">
                 Sign In
             </a>
 
@@ -178,7 +178,7 @@
             <button type="button"
                     @click="open = !open"
                     :aria-expanded="open"
-                    class="lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/70 text-white shrink-0"
+                    class="lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-full border border-black/70 text-black shrink-0"
                     aria-label="Open menu">
                 <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"/>
