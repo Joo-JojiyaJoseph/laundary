@@ -41,6 +41,7 @@ class FeedbackSection extends Component
                 title: 'Thank you!',
                 message: 'Your feedback was submitted and will appear once our team approves it.'
             );
+            $this->reset();
         } catch (\Throwable $e) {
             report($e);
             $this->dispatch('notify', type: 'error', title: 'Could not submit', message: 'Please try again in a moment.');

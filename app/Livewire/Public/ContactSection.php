@@ -28,6 +28,7 @@ class ContactSection extends Component
             ContactMessage::create($this->only(["name", "email", "phone", "message"]));
             $this->reset(["name", "email", "phone", "message"]);
             $this->dispatch("notify", type: "success", title: "Message sent!", message: "Thanks for reaching out — we will reply within a few hours.");
+            $this->reset();
         } catch (\Throwable $e) {
             report($e);
             $this->dispatch("notify", type: "error", title: "Could not send", message: "Please try again or message us on WhatsApp.");

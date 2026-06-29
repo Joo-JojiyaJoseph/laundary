@@ -31,7 +31,7 @@
 
         {{-- Animated icon --}}
         <template x-if="type === 'success'">
-            <span class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-success to-emerald-400 shadow-xl shadow-success/30">
+            <span class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-[#E8883E] shadow-xl shadow-success/30">
                 <svg class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5 13l4 4L19 7">
                         <animate attributeName="stroke-dasharray" from="0 24" to="24 24" dur="0.45s" fill="freeze"/>
@@ -54,7 +54,7 @@
 
         <button @click="show = false"
                 class="mt-6 w-full rounded-2xl px-4 py-3 text-sm font-semibold text-white transition active:scale-95"
-                :class="type === 'success' ? 'bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/25' : 'bg-gradient-to-r from-danger to-rose-500 shadow-lg shadow-danger/25'">
+                :class="type === 'success' ? 'bg-[#E8883E] shadow-lg shadow-primary/25' : 'bg-gradient-to-r from-danger to-rose-500 shadow-lg shadow-danger/25'">
             <span x-text="type === 'success' ? 'Great!' : 'Close'"></span>
         </button>
     </div>
