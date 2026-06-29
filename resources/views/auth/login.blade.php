@@ -58,9 +58,9 @@
             <button class="btn-primary w-full justify-center">Sign in</button>
         </form>
 
-        <p class="mt-6 text-center text-xs text-text-soft">
+        <!-- <p class="mt-6 text-center text-xs text-text-soft">
             Demo: <span class="font-mono">admin@laundrix.ai</span> / <span class="font-mono">password</span>
-        </p>
+        </p> -->
     </div>
     @livewireScriptConfig
 </body>

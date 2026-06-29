@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-[#FAFAF8] py-10 sm:py-16 px-6 sm:px-10" wire:key="track-{{ $order->id }}">
-    <div class="mx-auto max-w-4xl">
+    <div class="mx-auto max-w-4xl mt-10">
 
         {{-- Header card --}}
         <div class="bg-white rounded-3xl border border-[#E6E6E6] shadow-sm p-6 sm:p-8 mb-6" data-reveal>

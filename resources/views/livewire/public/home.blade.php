@@ -47,10 +47,10 @@
                     <p class="text-[#E8883E] text-xs sm:text-sm tracking-[0.20em] uppercase mb-2 lg:mb-4">
                         Kerala's Modern Laundry Network
                     </p>
-                    <h1 class="font-serif text-white text-4xl lg:text-5xl xl:text-6xl leading-12 lg:leading-16 mb-6">
+                    <h1 class="text-white text-4xl lg:text-5xl xl:text-6xl leading-12 lg:leading-16 mb-6 !font-serif">
                         Quality Laundry<br>Every Thread
                     </h1>
-                    <p class="text-white text-sm leading-relaxed mb-8 font-light font-sans">
+                    <p class="text-white text-[18px] leading-[1.7] font-light mb-8  tracking-wide">
                         Kerala's modern laundry dry-cleaning network. We pick up, wash, <br class="hidden lg:flex"> steam-iron and deliver every garment back to your door — and you can<br class="hidden lg:flex"> follow it live, every step of the way.
                     </p>
                     <div class="flex flex-wrap items-center gap-4">

@@ -53,6 +53,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -161,12 +163,12 @@
             <a href="{{ url('/') }}" class="font-serif text-2xl tracking-tight text-black">Laundrix</a>
 
             <ul class="hidden lg:flex items-center gap-10 text-sm font-medium text-white/90">
-                <li><a href="#home" class="text-black transition-colors font-medium">Home</a></li>
-                <li><a href="#about" class="text-black transition-colors font-medium">About</a></li>
-                <li><a href="#services" class="text-black transition-colors font-medium">Services</a></li>
-                <li><a href="#track-order" class="text-black transition-colors font-medium">Track Order</a></li>
-                <li><a href="#reviews" class="text-black transition-colors font-medium">Reviews</a></li>
-                <li><a href="#contact" class="text-black transition-colors font-medium">Contact</a></li>
+                <li><a href="{{ url('/') }}#home" class="text-black transition-colors font-medium">Home</a></li>
+                <li><a href="{{ url('/') }}#about" class="text-black transition-colors font-medium">About</a></li>
+                <li><a href="{{ url('/') }}#services" class="text-black transition-colors font-medium">Services</a></li>
+                <li><a href="{{ url('/') }}#track-order" class="text-black transition-colors font-medium">Track Order</a></li>
+                <li><a href="{{ url('/') }}#reviews" class="text-black transition-colors font-medium">Reviews</a></li>
+                <li><a href="{{ url('/') }}#contact" class="text-black transition-colors font-medium">Contact</a></li>
             </ul>
 
             <a href="/login"
@@ -204,12 +206,12 @@
              @click.outside="open = false"
              class="lg:hidden bg-[#1F1F1F]/95 backdrop-blur-md border-t border-white/10">
             <ul class="flex flex-col text-sm font-medium text-white/90 px-6 py-4">
-                <li><a href="#home" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Home</a></li>
-                <li><a href="#about" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">About</a></li>
-                <li><a href="#services" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Services</a></li>
-                <li><a href="#track-order" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Track Order</a></li>
-                <li><a href="#reviews" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Reviews</a></li>
-                <li><a href="#contact" @click="open = false" class="block py-3 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="{{ url('/') }}#home" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Home</a></li>
+                <li><a href="{{ url('/') }}#about" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">About</a></li>
+                <li><a href="{{ url('/') }}#services" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Services</a></li>
+                <li><a href="{{ url('/') }}#track-order" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Track Order</a></li>
+                <li><a href="{{ url('/') }}#reviews" @click="open = false" class="block py-3 border-b border-white/10 hover:text-white transition-colors">Reviews</a></li>
+                <li><a href="{{ url('/') }}#contact" @click="open = false" class="block py-3 hover:text-white transition-colors">Contact</a></li>
             </ul>
             <div class="px-6 pb-6 sm:hidden">
                 <a href="/login" @click="open = false"
@@ -337,7 +339,7 @@
                     <div>
                         <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">About</p>
                         <ul class="space-y-3 text-sm">
-                            <li><a href="#about" class="hover:text-white transition-colors">Our Story</a></li>
+                            <li><a href="{{ url('/') }}#about" class="hover:text-white transition-colors">Our Story</a></li>
                             <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
                             <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
                         </ul>
@@ -345,16 +347,16 @@
                     <div>
                         <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">Services</p>
                         <ul class="space-y-3 text-sm">
-                            <li><a href="#services" class="hover:text-white transition-colors">Dry Cleaning</a></li>
-                            <li><a href="#services" class="hover:text-white transition-colors">Wash &amp; Fold</a></li>
-                            <li><a href="#services" class="hover:text-white transition-colors">Premium Laundry</a></li>
+                            <li><a href="{{ url('/') }}#services" class="hover:text-white transition-colors">Dry Cleaning</a></li>
+                            <li><a href="{{ url('/') }}#services" class="hover:text-white transition-colors">Wash &amp; Fold</a></li>
+                            <li><a href="{{ url('/') }}#services" class="hover:text-white transition-colors">Premium Laundry</a></li>
                         </ul>
                     </div>
                     <div>
                         <p class="text-[#E8883E] text-xs font-semibold tracking-[0.1em] uppercase mb-4">Quick Links</p>
                         <ul class="space-y-3 text-sm">
-                            <li><a href="#track-order" class="hover:text-white transition-colors">Track Order</a></li>
-                            <li><a href="#reviews" class="hover:text-white transition-colors">Reviews</a></li>
+                            <li><a href="{{ url('/') }}#track-order" class="hover:text-white transition-colors">Track Order</a></li>
+                            <li><a href="{{ url('/') }}#reviews" class="hover:text-white transition-colors">Reviews</a></li>
                             <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
                         </ul>
                     </div>
