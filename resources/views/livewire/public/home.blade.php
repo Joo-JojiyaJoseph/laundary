@@ -53,9 +53,9 @@
                         Kerala's modern laundry dry-cleaning network. We pick up, wash, <br class="hidden lg:flex"> steam-iron and deliver every garment back to your door — and you can<br class="hidden lg:flex"> follow it live, every step of the way.
                     </p>
                     <div class="flex flex-wrap items-center gap-4">
-                        <a href="#about"
+                        <a href="#track-order"
                             class="inline-flex items-center justify-center rounded-full bg-[#E8883E] text-white text-sm ] px-7 py-4 hover:bg-[#d97a30] transition-colors">
-                            Discover More
+                            Track order
                         </a>
                         <a href="#contact"
                             class="inline-flex items-center justify-center rounded-full border-2 border-white/70 text-white text-sm ] px-7 py-4 hover:bg-white hover:text-[#1F1F1F] transition-colors">
