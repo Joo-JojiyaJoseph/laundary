@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Admin\Services\Index::save() (slug is generated in the controller). */
-class ServiceRequest extends FormRequest
+class ServiceRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

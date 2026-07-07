@@ -10,7 +10,7 @@ use App\Models\Order;
  * Livewire\Admin\Orders\Show::addPayment() and Livewire\Admin\Payments\Index::recordPayment().
  * The "max" cap on amount is set dynamically against the order's outstanding balance.
  */
-class StorePaymentRequest extends FormRequest
+class StorePaymentRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

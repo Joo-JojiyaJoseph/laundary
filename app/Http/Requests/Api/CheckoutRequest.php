@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * The cart line items are validated per-item in PosController::checkout()
  * since the shape (product_id, qty, ...) is nested and easier to check there.
  */
-class CheckoutRequest extends FormRequest
+class CheckoutRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

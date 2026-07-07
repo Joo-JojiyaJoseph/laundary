@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Admin\Riders\Index::save() for the "edit" path (password optional). */
-class UpdateRiderRequest extends FormRequest
+class UpdateRiderRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

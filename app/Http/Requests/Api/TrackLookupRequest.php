@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Track\TrackLookup / TrackLookupForm. */
-class TrackLookupRequest extends FormRequest
+class TrackLookupRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

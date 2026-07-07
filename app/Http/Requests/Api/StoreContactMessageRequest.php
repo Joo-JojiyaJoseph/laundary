@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Public\ContactSection (and the duplicate logic in Public\Home::submit()). */
-class StoreContactMessageRequest extends FormRequest
+class StoreContactMessageRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

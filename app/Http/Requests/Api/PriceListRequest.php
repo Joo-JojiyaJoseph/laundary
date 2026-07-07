@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Admin\PriceLists\Index::save(). */
-class PriceListRequest extends FormRequest
+class PriceListRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

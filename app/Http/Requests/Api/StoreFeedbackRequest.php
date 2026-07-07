@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Public\FeedbackSection (and the duplicate logic in Public\Home::ratingSubmit()). */
-class StoreFeedbackRequest extends FormRequest
+class StoreFeedbackRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

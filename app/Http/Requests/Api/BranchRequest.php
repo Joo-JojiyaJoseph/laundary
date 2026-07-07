@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Shared rules for store + update, mirrors Livewire\Admin\Branches\Index::save(). */
-class BranchRequest extends FormRequest
+class BranchRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

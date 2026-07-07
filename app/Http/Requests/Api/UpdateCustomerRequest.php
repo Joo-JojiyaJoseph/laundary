@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
  * Mirrors Livewire\Admin\Customers\Index::save() for the "edit" path — the
  * unique rules ignore the current record, exactly like ->ignore($this->editingId).
  */
-class UpdateCustomerRequest extends FormRequest
+class UpdateCustomerRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

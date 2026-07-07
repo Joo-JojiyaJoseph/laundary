@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /** Mirrors Livewire\Admin\Categories\Index::save(). */
-class CategoryRequest extends FormRequest
+class CategoryRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /** Mirrors Livewire\Admin\Riders\Index::save() for the "create" (new user) path. */
-class StoreRiderRequest extends FormRequest
+class StoreRiderRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {

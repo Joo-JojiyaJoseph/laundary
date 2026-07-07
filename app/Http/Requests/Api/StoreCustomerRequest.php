@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
  * Mirrors the validation block inside Livewire\Admin\Customers\Index::save()
  * for the "create" path (editingId is always null here).
  */
-class StoreCustomerRequest extends FormRequest
+class StoreCustomerRequest extends ApiFormRequest
 {
     public function authorize(): bool
     {
