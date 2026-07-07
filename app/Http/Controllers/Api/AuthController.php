@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class AuthController extends Controller
     /**
      * POST /api/v1/auth/login
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -38,9 +39,15 @@ class AuthController extends Controller
             'email' => $credentials['email'],
             'password' => $credentials['password'],
         ])) {
-            throw ValidationException::withMessages([
-                'email' => ['These credentials do not match our records.'],
-            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials.',
+                'errors' => [
+                    'email' => [
+                        'These credentials do not match our records.'
+                    ]
+                ],
+            ], 422);
         }
 
         $user = Auth::user();
@@ -55,7 +62,7 @@ class AuthController extends Controller
         $isRider = $user->hasRole('rider') || $user->rider()->exists();
 
         $token = $user->createToken(
-            $request->input('device_name', 'mobile-app')
+            $request->input('device_name', 'email')
         )->plainTextToken;
 
         return response()->json([
